@@ -16,9 +16,6 @@ panel.place(x=0,y=0)
 labelTitulo = Label(panel, text = "Integratec" , bg="blue", fg="yellow", font = ('calibri', 40))
 labelTitulo.place(x=20,y=30)
 
-#Funciones
-
-
 
 #Botones
 boton1=Button(ventana,text='1. Estudiantes por sede',width=18,height=2)
