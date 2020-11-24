@@ -50,10 +50,40 @@ def estudiantesPorSede():
     labelLimon.place(x=20,y=400)
     entryLimon=Entry(ventana1)
     entryLimon.place(x=280,y=400)
-    botonAceptar=Button(ventana1,text='Aceptar',width=18,height=2)
+
+    def obtenerCantidades():
+        try:
+            cantCartago=int(entryCartago.get())
+            cantSanCarlos=int(entrySanCarlos.get())
+            cantSanJose=int(entrySanJose.get())
+            cantAlajuela=int(entryAlajuela.get())
+            cantLimon=int(entryLimon.get())
+            ventanaExito=Tk()
+            ventanaExito.title('Datos Ingresados')
+            ventanaExito.geometry('600x300')
+            ventanaExito.resizable(FALSE,FALSE)
+            labelExito=Label(ventanaExito,text='Datos ingresados con éxito ', bg='blue', font=('arial',20))
+            labelExito.place(x=100,y=150)
+            
+            ventanaExito.configure(bg='blue')
+            ventanaExito.mainloop()
+
+        except:
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('600x300')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: Datos ingresados no válidos ', bg='red', font=('arial',20))
+            labelError.place(x=50,y=150)
+            ventanaError.configure(bg='red')
+            ventanaError.mainloop()
+
+    botonAceptar=Button(ventana1,text='Aceptar',width=18,height=2,command=obtenerCantidades)
     botonAceptar.place(x=200,y=500)
     botonVolver=Button(ventana1,text='Volver al menú principal',width=20,height=2,command= lambda:ventana1.destroy())
     botonVolver.place(x=400,y=500)
+    
+    
     ventana1.mainloop()
 
 def estudiatesDeCarreraPorSede():
@@ -69,7 +99,7 @@ def estudiatesDeCarreraPorSede():
 
 #Botones
 boton1=Button(ventanaPrincipal,text='1. Estudiantes por sede',width=18,height=2, command=estudiantesPorSede)
-boton2=Button(ventanaPrincipal,text='2. Estudiantes de carrera por sede',state=NORMAL,width=25,height=2,command=estudiatesDeCarreraPorSede)
+boton2=Button(ventanaPrincipal,text='2. Estudiantes de carrera por sede',state=DISABLED,width=25,height=2,command=estudiatesDeCarreraPorSede)
 boton3=Button(ventanaPrincipal,text='3. Crear mentores', state=DISABLED,width=14,height=2)
 boton4=Button(ventanaPrincipal,text='4. Asignar mentores',state=DISABLED,width=16,height=2)
 boton5=Button(ventanaPrincipal,text='5. Actualizar estudiante',state=DISABLED,width=18,height=2)
