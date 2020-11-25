@@ -1,8 +1,8 @@
 import requests
-
+import re
+payload = {'sede': 'San Carlos'}
 r = requests.get('https://www.tec.ac.cr/carreras')
-
-print(type(r))
-
-data=r.text
-print(type(data))
+contenido = r.text
+stripped = re.sub('<[^<]+?>', '',contenido)
+print(stripped)
+print(r.json())
