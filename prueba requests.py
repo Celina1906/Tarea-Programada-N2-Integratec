@@ -5,4 +5,3 @@ r = requests.get('https://www.tec.ac.cr/carreras')
 contenido = r.text
 stripped = re.sub('<[^<]+?>', '',contenido)
 print(stripped)
-print(r.json())
