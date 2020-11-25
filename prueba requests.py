@@ -9,7 +9,6 @@ def obtenerCarreras():
     contenido= contenido.rsplit('\n')
     cont=-1
     for i in contenido:
-        #print(i)
         if '<div class="panel-pane pane-views-panes pane-directory-academic-programs-per-type-panel-pane-2"  >' in i:
                 break
         if '<h3 class = "group-title">' in i or '<div class="title"><a href=' in i:
