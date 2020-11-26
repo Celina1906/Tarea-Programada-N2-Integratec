@@ -12,8 +12,8 @@ def obtenerCarreras():
         if '<div class="panel-pane pane-views-panes pane-directory-academic-programs-per-type-panel-pane-2"  >' in i:
                 break
         if '<h3 class = "group-title">' in i or '<div class="title"><a href=' in i:
-            if '<div class="title"><a href="/programas-academicos/' in i:
-                continue
+#            if '<div class="title"><a href="/programas-academicos/' in i:
+#                continue
             soup = BeautifulSoup(i, 'html.parser')
             if '<h3 class = "group-title">' in i:
                 lista+=[[soup.h3.string]]
