@@ -33,7 +33,6 @@ def sacaListaKeys(diccionario):
         listaNueva+=[i]
     print(listaNueva)
     return listaNueva
-
 def crearMatrizGeneral(MatrizCarreras, listaCantidad, listaSede):
     matrizSJ=[]
     matrizCAR=[]
