@@ -1,7 +1,12 @@
+#Elaborado por: Leandro Camacho Aguilar y Celina Madrigal Murillo
+#Fecha de Creación: 25/11/2020 6:40pm 
+#Fecha de última Modificación: 5/12/2020 9:32pm
+#Versión: 3.9.0
+#Importaciones
 import requests
 import re
 from bs4 import BeautifulSoup
-
+#Funciones
 def obtenerCarreras():
     lista=[]
     r = requests.get('https://www.tec.ac.cr/carreras')
