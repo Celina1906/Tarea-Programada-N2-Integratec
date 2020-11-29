@@ -63,7 +63,6 @@ def estudiantesPorSede():
             listaCantidad=[cantSanJose,cantCartago,cantSanCarlos,cantLimon,cantAlajuela]
             listaSede=["CTLSJ","CTCC","CTLSC","CAL","CAA"]
             matrizSedesEst=crearMatrizGeneral(matrizSedesYCarreras,listaCantidad,listaSede)
-            print(matrizSedesEst)
             boton2['state']=NORMAL
             boton3['state']=NORMAL
             ventanaExito=Tk()
