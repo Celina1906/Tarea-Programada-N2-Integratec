@@ -4,8 +4,11 @@
 #Versión: 3.9.0
 #Importaciones
 from tkinter import*
+from funciones import *
 #Variables globales
-matrizPrimerIngreso=['1']
+matrizSedesYCarreras=quitaRepetidos(obtenerCarreras())
+matrizSedesEst=[]
+dicPrimerIngreso={}
 matrizMentores=['3']
 #Ventana Principal
 ventanaPrincipal=Tk()
@@ -13,13 +16,8 @@ ventanaPrincipal.title('Integratec')
 ventanaPrincipal.geometry('800x300')
 ventanaPrincipal.resizable(FALSE,FALSE)
 ventanaPrincipal.configure(bg='blue')
-
-#panel=Frame(ventana,bg='blue',width=1000,height=600)
-#panel.place(x=0,y=0)
-
 labelTitulo = Label(ventanaPrincipal, text = "Integratec" , bg="blue", fg="yellow", font = ('calibri', 40))
 labelTitulo.place(x=20,y=30)
-
 #Funciones
 #Función botón 1
 def estudiantesPorSede():   
@@ -53,25 +51,29 @@ def estudiantesPorSede():
     labelLimon.place(x=20,y=400)
     entryLimon=Entry(ventana1)
     entryLimon.place(x=280,y=400)
-
-    
     def obtenerCantidades():
+        global matrizSedesYCarreras
+        global matrizSedesEst
         try:
             cantCartago=int(entryCartago.get())
             cantSanCarlos=int(entrySanCarlos.get())
             cantSanJose=int(entrySanJose.get())
             cantAlajuela=int(entryAlajuela.get())
             cantLimon=int(entryLimon.get())
+            listaCantidad=[cantSanJose,cantCartago,cantSanCarlos,cantLimon,cantAlajuela]
+            listaSede=["CTLSJ","CTCC","CTLSC","CAL","CAA"]
+            matrizSedesEst=crearMatrizGeneral(matrizSedesYCarreras,listaCantidad,listaSede)
+            print(matrizSedesEst)
+            boton2['state']=NORMAL
+            boton3['state']=NORMAL
             ventanaExito=Tk()
             ventanaExito.title('Datos Ingresados')
             ventanaExito.geometry('600x300')
             ventanaExito.resizable(FALSE,FALSE)
             labelExito=Label(ventanaExito,text='Datos ingresados con éxito ', bg='blue', font=('arial',20))
             labelExito.place(x=100,y=150)
-            
             ventanaExito.configure(bg='blue')
             ventanaExito.mainloop()
-
         except:
             ventanaError=Tk()
             ventanaError.title('ERROR')
@@ -81,22 +83,21 @@ def estudiantesPorSede():
             labelError.place(x=50,y=150)
             ventanaError.configure(bg='red')
             ventanaError.mainloop()
-
     botonAceptar=Button(ventana1,text='Aceptar',width=18,height=2,command=obtenerCantidades)
     botonAceptar.place(x=200,y=500)
     botonVolver=Button(ventana1,text='Volver al menú principal',width=20,height=2,command= lambda:ventana1.destroy())
-    botonVolver.place(x=400,y=500)
-    
-    
+    botonVolver.place(x=400,y=500) 
     ventana1.mainloop()
-
 #Función botón 2
 def estudiatesDeCarreraPorSede():
+    global matrizSedesEst, dicPrimerIngreso
     ventana2=Tk()
     ventana2.config(bg='blue')
     ventana2.title('Estudiantes de carrera por sede')
     ventana2.geometry('1000x300')
     ventana2.resizable(FALSE,FALSE)
+    dicPrimerIngreso=crearDicPrimerIngreso(matrizSedesEst,dicPrimerIngreso)
+    print(dicPrimerIngreso)
     labelTitulo2 = Label(ventana2, text = "Base de datos creada satisfactoriamente" , bg="blue", fg="yellow", font = ('calibri', 40))
     labelTitulo2.place(x=50,y=50)
     botonVolver=Button(ventana2,text='Volver al menú principal',width=20,height=2,command= lambda:ventana2.destroy())
@@ -124,9 +125,9 @@ def actualizarEstudiante():
         entryCarnet=Entry(ventana5)
         entryCarnet.place(x=310,y=130,width=140,height=30)
         def buscarCarnetPrimerIngreso():#!Función provisional Hay que revisarla!!!
-            global matrizPrimerIngreso 
+            global dicPrimerIngreso 
             bandera=0   
-            for estudiante in matrizPrimerIngreso:
+            for estudiante in dicPrimerIngreso:
                 if estudiante==entryCarnet.get():
                     bandera=1
                     ventanaActualizar=Tk()
@@ -216,7 +217,6 @@ def actualizarEstudiante():
     botonMentor=Button(ventana5,text='Mentor',width=20,height=2,command=pedirCarnetMentor)
     botonMentor.place(x=370,y=130)
     
-
 def generarReportes():
     ventana6=Tk()
     ventana6.config(bg='blue')
@@ -231,14 +231,12 @@ def generarReportes():
     botonCarrera.place(x=250,y=150)
     botonMentor=Button(ventana6,text='Reporte por mentor',width=18,height=2)
     botonMentor.place(x=420,y=150)
-
-
 #Creación de botones de pantalla principal
 boton1=Button(ventanaPrincipal,text='1. Estudiantes por sede',width=18,height=2, command=estudiantesPorSede)
 boton2=Button(ventanaPrincipal,text='2. Estudiantes de carrera por sede',state=DISABLED,width=25,height=2,command=estudiatesDeCarreraPorSede)
 boton3=Button(ventanaPrincipal,text='3. Crear mentores', state=DISABLED,width=14,height=2)
 boton4=Button(ventanaPrincipal,text='4. Asignar mentores',state=DISABLED,width=16,height=2)
-boton5=Button(ventanaPrincipal,text='5. Actualizar estudiante',state=NORMAL,width=18,height=2, command=actualizarEstudiante)
+boton5=Button(ventanaPrincipal,text='5. Actualizar estudiante',state=DISABLED,width=18,height=2, command=actualizarEstudiante)
 boton6=Button(ventanaPrincipal,text='6. Generar reportes',width=18,height=2,command=generarReportes)
 boton7=Button(ventanaPrincipal,text='7. Crear base de datos en Excel',width=25,height=2)
 boton8=Button(ventanaPrincipal,text='8. Enviar correo',width=13,height=2)
@@ -253,16 +251,4 @@ boton6.place(x=100,y=200)
 boton7.place(x=260,y=200)
 boton8.place(x=470,y=200)
 boton9.place(x=600,y=200)
-
-
-#*Prueba que funciona
-#while matrizEstudiantes==[]:
- #   if matrizEstudiantes==[]:
-  #      boton2['state']=DISABLED
-    #    est=input('Digite un estudiante: ')
-    #    matrizEstudiantes+=[est]
-#boton2['state']=NORMAL
-
-
 ventanaPrincipal.mainloop()
-

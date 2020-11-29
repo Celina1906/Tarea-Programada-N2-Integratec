@@ -5,6 +5,7 @@
 #Importaciones
 from Archrequests import *
 import random
+import names
 #Variables globales
 sedesCarreras=quitaRepetidos(obtenerCarreras())
 #Funciones
@@ -31,7 +32,7 @@ def sacaListaKeys(diccionario):
     listaNueva=[]
     for i in llaves:
         listaNueva+=[i]
-    print(listaNueva)
+    #print(listaNueva)
     return listaNueva
 def crearMatrizGeneral(MatrizCarreras, listaCantidad, listaSede):
     matrizSJ=[]
@@ -76,10 +77,67 @@ def crearMatrizGeneral(MatrizCarreras, listaCantidad, listaSede):
             dicA=crearDiccionario(listaCantidad[4],dicA)
             matrizA.append(dicA)  
     return [matrizCAR,matrizSC,matrizSJ,matrizA,matrizL]
-    
-MatrizCarreras=[['Campus Tecnológico Local San José', 'Arquitectura y Urbanismo', 'Administración de Empresas', 'Ingeniería en Computación'], ['Campus Tecnológico Central Cartago', 'Ingeniería en Biotecnología', 'Administración de Empresas', 'Ingeniería en Computación', 'Gestión en Turismo Sostenible', 'Enseñanza de la Matemática con Entornos Tecnológicos', 'Administración de Tecnología de Información', 'Ingeniería Agrícola', 'Ingeniería Ambiental', 'Ingeniería en Electrónica', 'Ingeniería Agronegocios', 'Ingeniería en Computadores', 'Ingeniería en Construcción', 'Ingeniería en Diseño Industrial', 'Ingeniería en Materiales', 'Ingeniería en Producción Industrial', 'Ingeniería en Seguridad Laboral e Higiene Ambiental', 'Ingeniería Física', 'Ingeniería Forestal', 'Ingeniería Mecatrónica', 'Ingeniería en Mantenimiento Industrial'], ['Campus Tecnológico Local San Carlos', 'Administración de Empresas', 'Ingeniería en Computación', 'Gestión en Turismo Rural Sostenible', 'Ingeniería en Electrónica', 'Ingeniería en Agronomía', 'Ingeniería en Producción Industrial'], ['Centro Académico de Limón', 'Administración de Empresas', 'Ingeniería en Computación', 'Ingeniería en Producción de Industrial'], ['Centro Académico de Alajuela', 'Ingeniería en Computación', 'Ingeniería en Electrónica']]
-             #? SJ   C   SC  L   A
-listaCantidad=[503,1200,400,200,300]
-listaSede=["CTLSJ","CTCC","CTLSC","CAL","CAA"]
 
-print(crearMatrizGeneral(MatrizCarreras,listaCantidad,listaSede))
+
+def crearDicPrimerIngreso(matrizSedesEst,diccPrimerIngreso):
+    for sede in matrizSedesEst:
+        for carrera in sede[2]:
+            cantEst=sede[2][carrera]
+            while cantEst>0:
+                nombre=names.get_first_name()
+                apellido1=names.get_last_name()
+                apellido2=names.get_last_name()
+                nombreCompleto=nombre+' '+apellido1+' '+apellido2
+                if sede[0]=='CTCC':
+                    sedeEst='CAMPUS TECNOLÓGICO CENTRAL CARTAGO'
+                    carnet='202101'+str(random.randint(1000,9999))
+                    while int(carnet) in diccPrimerIngreso:
+                        carnet='202101'+str(random.randint(1000,9999))
+                    carnet=int(carnet)
+                if sede[0]=='CTLSC':
+                    sedeEst='CAMPUS TECNOLÓGICO LOCAL SAN CARLOS'
+                    carnet='202102'+str(random.randint(1000,9999))
+                    while int(carnet) in diccPrimerIngreso:
+                        carnet='202102'+str(random.randint(1000,9999))
+                    carnet=int(carnet)
+                if sede[0]=='CTLSJ':
+                    sedeEst='CAMPUS TECNOLÓGICO LOCAL SAN JOSÉ'
+                    carnet='202103'+str(random.randint(1000,9999))
+                    while int(carnet) in diccPrimerIngreso:
+                        carnet='202103'+str(random.randint(1000,9999))
+                    carnet=int(carnet)
+                if sede[0]=='CAA':
+                    sedeEst='CENTRO ACADÉMICO DE ALAJUELA'
+                    carnet='202104'+str(random.randint(1000,9999))
+                    while int(carnet) in diccPrimerIngreso:
+                        carnet='202104'+str(random.randint(1000,9999))
+                    carnet=int(carnet)
+                if sede[0]=='CAL':
+                    sedeEst='CENTRO ACADÉMICO DE LIMÓN'
+                    carnet='202105'+str(random.randint(1000,9999))
+                    while int(carnet) in diccPrimerIngreso:
+                        carnet='202105'+str(random.randint(1000,9999))
+                    carnet=int(carnet)
+                values=list(diccPrimerIngreso.values())
+                numTel=random.randint(60000000,99999999)
+                for i in range(len(values)):
+                    if numTel in values[i]:
+                        numTel=random.randint(60000000,99999999)
+                        i=0
+                correo=nombre[0].lower()+apellido1.lower()+'@estudiantec.cr'
+                for i in range(len(values)):
+                    letra=2
+                    if correo in values[i]:
+                        correo=nombre[0:letra].lower()+apellido1.lower()+'@estudiantec.cr'
+                        letra+=1
+                        i=0 
+                carreraEst=carrera
+                carnetMentor=0
+                datos=[nombreCompleto,numTel,correo,sedeEst,carreraEst,carnetMentor]
+                diccPrimerIngreso[carnet]=datos
+                cantEst-=1
+    return diccPrimerIngreso
+
+       
+
+
