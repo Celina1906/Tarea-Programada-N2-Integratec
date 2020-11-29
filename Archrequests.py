@@ -35,5 +35,3 @@ def quitaRepetidos(matriz):
                 listaTemp+=[i]
         nuevaMatriz+=[listaTemp]
     return nuevaMatriz
-
-print(quitaRepetidos(obtenerCarreras()))
