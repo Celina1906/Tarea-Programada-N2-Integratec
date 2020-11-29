@@ -9,8 +9,6 @@ import names
 #Variables globales
 sedesCarreras=quitaRepetidos(obtenerCarreras())
 #Funciones
-#def dividirEstudiantes():
-
 def crearDiccionario(cantidad, diccionario):
     keys = sacaListaKeys(diccionario)
     largo=len(keys)
@@ -138,6 +136,86 @@ def crearDicPrimerIngreso(matrizSedesEst,diccPrimerIngreso):
                 cantEst-=1
     return diccPrimerIngreso
 
-       
+def sacarDatosMentores(matrizMentores):
+    datosMentores=[]
+    datosMentores2=[]
+    for sede in matrizMentores:
+        datosMentores+=sede[1].values()
+    for datos in datosMentores:
+        for dato in datos:
+            datosMentores2+=[dato]
+    return datosMentores2
+
+def sacarDatosPrimerIngreso(dicPrimerIngreso):
+    datosPrimerIngreso=list(dicPrimerIngreso.values())
+    datosPrimerIngreso2=[]
+    for datos in datosPrimerIngreso:
+        for dato in datos:
+            datosPrimerIngreso2+=[dato]
+    return datosPrimerIngreso2
+
+def sacarCarnetsMentores(matrizMentores):
+    carnetsMentores=[]
+    for sede in matrizMentores:
+        carnetsMentores+=sede[1].keys()
+    return carnetsMentores
+
+
+def crearMatMentores(matrizSedesEst,diccPrimerIngreso,matrizMentores):
+    for sede in matrizSedesEst:
+        for carrera in sede[2]:
+            cantEst=sede[2][carrera]
+            cantMentores=abs(cantEst*0.05)
+            while cantMentores>0:
+                carnetsMentores=sacarCarnetsMentores(matrizMentores)
+                datosMentores=sacarDatosMentores(matrizMentores)
+                datosPrimerIngreso=sacarDatosPrimerIngreso(diccPrimerIngreso)
+                nombre=names.get_first_name()
+                apellido1=names.get_last_name()
+                apellido2=names.get_last_name()
+                nombreCompleto=nombre+' '+apellido1+' '+apellido2
+                correo=nombre[0].lower()+apellido1.lower()+'@estudiantec.cr'
+                letra=2
+                while correo in datosMentores or correo in datosPrimerIngreso:
+                    correo=nombre[0:letra].lower()+apellido1.lower()+'@estudiantec.cr'
+                    letra+=1
+                carreraMentor=carrera
+                if sede[0]=='CTCC':
+                    carnet='202001'+str(random.randint(1000,9999))
+                    while int(carnet) in carnetsMentores:
+                        carnet='202001'+str(random.randint(1000,9999))
+                    carnet=int(carnet)
+                    datos=[nombreCompleto,carrera,correo]
+                    matrizMentores[0][1][carnet]=datos
+                if sede[0]=='CTLSC':
+                    carnet='202002'+str(random.randint(1000,9999))
+                    while int(carnet) in carnetsMentores:
+                        carnet='202002'+str(random.randint(1000,9999))
+                    carnet=int(carnet)
+                    datos=[nombreCompleto,carrera,correo]
+                    matrizMentores[1][1][carnet]=datos
+                if sede[0]=='CTLSJ':
+                    carnet='202003'+str(random.randint(1000,9999))
+                    while int(carnet) in carnetsMentores:
+                        carnet='202003'+str(random.randint(1000,9999))
+                    carnet=int(carnet)
+                    datos=[nombreCompleto,carrera,correo]
+                    matrizMentores[2][1][carnet]=datos
+                if sede[0]=='CAA':
+                    carnet='202004'+str(random.randint(1000,9999))
+                    while int(carnet) in carnetsMentores:
+                        carnet='202004'+str(random.randint(1000,9999))
+                    carnet=int(carnet)
+                    datos=[nombreCompleto,carrera,correo]
+                    matrizMentores[3][1][carnet]=datos
+                if sede[0]=='CAL':
+                    carnet='202005'+str(random.randint(1000,9999))
+                    while int(carnet) in carnetsMentores:
+                        carnet='202005'+str(random.randint(1000,9999))
+                    carnet=int(carnet)
+                    datos=[nombreCompleto,carrera,correo]
+                    matrizMentores[4][1][carnet]=datos
+                cantMentores-=1
+    return matrizMentores
 
 

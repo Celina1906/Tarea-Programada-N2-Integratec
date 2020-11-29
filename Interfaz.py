@@ -9,7 +9,7 @@ from funciones import *
 matrizSedesYCarreras=quitaRepetidos(obtenerCarreras())
 matrizSedesEst=[]
 dicPrimerIngreso={}
-matrizMentores=['3']
+matrizMentores=[['CTCC',{}],['CTLSC',{}],['CTLSJ',{}],['CAA',{}],['CAL',{}]]
 #Ventana Principal
 ventanaPrincipal=Tk()
 ventanaPrincipal.title('Integratec')
@@ -102,6 +102,22 @@ def estudiatesDeCarreraPorSede():
     botonVolver=Button(ventana2,text='Volver al menú principal',width=20,height=2,command= lambda:ventana2.destroy())
     botonVolver.place(x=400,y=200)
     ventana2.mainloop()
+
+def crearMentores():
+    global matrizSedesEst, dicPrimerIngreso,matrizMentores 
+    matrizMentores=crearMatMentores(matrizSedesEst,dicPrimerIngreso,matrizMentores)
+    print(matrizMentores)
+    ventana3=Tk()
+    ventana3.config(bg='blue')
+    ventana3.title('Crear mentores')
+    ventana3.geometry('1000x300')
+    ventana3.resizable(FALSE,FALSE)
+    labelTitulo3 = Label(ventana3, text = "Mentores creados satisfactoriamente" , bg="blue", fg="yellow", font = ('calibri', 40))
+    labelTitulo3.place(x=50,y=50)
+    botonVolver=Button(ventana3,text='Volver al menú principal',width=20,height=2,command= lambda:ventana3.destroy())
+    botonVolver.place(x=400,y=200)
+    ventana3.mainloop()
+
 #Función botón 5
 def actualizarEstudiante():
     ventana5=Tk()
@@ -233,7 +249,7 @@ def generarReportes():
 #Creación de botones de pantalla principal
 boton1=Button(ventanaPrincipal,text='1. Estudiantes por sede',width=18,height=2, command=estudiantesPorSede)
 boton2=Button(ventanaPrincipal,text='2. Estudiantes de carrera por sede',state=DISABLED,width=25,height=2,command=estudiatesDeCarreraPorSede)
-boton3=Button(ventanaPrincipal,text='3. Crear mentores', state=DISABLED,width=14,height=2)
+boton3=Button(ventanaPrincipal,text='3. Crear mentores', state=DISABLED,width=14,height=2,command=crearMentores)
 boton4=Button(ventanaPrincipal,text='4. Asignar mentores',state=DISABLED,width=16,height=2)
 boton5=Button(ventanaPrincipal,text='5. Actualizar estudiante',state=DISABLED,width=18,height=2, command=actualizarEstudiante)
 boton6=Button(ventanaPrincipal,text='6. Generar reportes',width=18,height=2,command=generarReportes)
