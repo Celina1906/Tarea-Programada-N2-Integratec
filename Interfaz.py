@@ -144,11 +144,22 @@ def actualizarEstudiante():
         labelCarnet.place(x=110,y=130)
         entryCarnet=Entry(ventana5)
         entryCarnet.place(x=310,y=130,width=140,height=30)
-        def buscarCarnetPrimerIngreso():#!Función provisional Hay que revisarla!!!
+        def buscarCarnetPrimerIngreso():
             global dicPrimerIngreso 
             bandera=0   
             for estudiante in dicPrimerIngreso:
-                if estudiante==entryCarnet.get():
+                try:
+                    int(entryCarnet.get())
+                except:
+                    ventanaError=Tk()
+                    ventanaError.title('ERROR')
+                    ventanaError.geometry('600x300')
+                    ventanaError.resizable(FALSE,FALSE)
+                    labelError=Label(ventanaError,text='ERROR: Dato ingresado no válido ', bg='red', font=('arial',20))
+                    labelError.place(x=50,y=150)
+                    ventanaError.configure(bg='red')
+                    ventanaError.mainloop()
+                if estudiante==int(entryCarnet.get()):
                     bandera=1
                     ventanaActualizar=Tk()
                     ventanaActualizar.config(bg='blue')
@@ -170,9 +181,43 @@ def actualizarEstudiante():
                     entryCorreo=Entry(ventanaActualizar)
                     entryCorreo.place(x=360,y=270,width=200,height=30)
                     def actualizarPrimerIngreso():#!Falta hacer evidentemente pero mejor lo pongo por si acaso
-                        return
-                    botonAceptarAc=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarPrimerIngreso)
-                    botonAceptarAc.place(x=260,y=380)
+                        if not re.match("^\d{8}$",entryTelefono.get()):
+                            ventanaError=Tk()
+                            ventanaError.title('ERROR')
+                            ventanaError.geometry('600x300')
+                            ventanaError.resizable(FALSE,FALSE)
+                            labelError=Label(ventanaError,text='ERROR: Dato ingresado no válido ', bg='red', font=('arial',20))
+                            labelError.place(x=50,y=150)
+                            ventanaError.configure(bg='red')
+                            ventanaError.mainloop()
+                            botonAceptarAc=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarPrimerIngreso)
+                            botonAceptarAc.place(x=260,y=380)
+                        elif (entryTelefono.get()[0]!= 6 and entryTelefono.get()[0]!=7 and entryTelefono.get()[0]!=8 and entryTelefono.get()[0]!=9) and not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo.get()):
+                            ventanaError=Tk()
+                            ventanaError.title('ERROR')
+                            ventanaError.geometry('600x300')
+                            ventanaError.resizable(FALSE,FALSE)
+                            labelError=Label(ventanaError,text='ERROR: Datos ingresado no válido ', bg='red', font=('arial',20))
+                            labelError.place(x=50,y=150)
+                            ventanaError.configure(bg='red')
+                            ventanaError.mainloop()
+                            botonAceptarAc=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarPrimerIngreso)
+                            botonAceptarAc.place(x=260,y=380)
+                        else:
+                            dicPrimerIngreso[int(entryCarnet.get())][0]=entryNombre.get()
+                            dicPrimerIngreso[int(entryCarnet.get())][1]=int(entryTelefono.get())
+                            dicPrimerIngreso[int(entryCarnet.get())][2]=entryCorreo.get()
+                            print(dicPrimerIngreso)
+                            ventanaCambio2=Tk()
+                            ventanaCambio2.title('Datos cambiados')
+                            ventanaCambio2.geometry('600x300')
+                            ventanaCambio2.resizable(FALSE,FALSE)
+                            labelCambio=Label(ventanaError,text='Datos cambiados con éxito ', bg='blue', font=('arial',20))
+                            labelCambio.place(x=50,y=150)
+                            ventanaCambio2.configure(bg='blue')
+                            ventanaCambio2.mainloop()
+                    botonAceptar2=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarPrimerIngreso)
+                    botonAceptar2.place(x=220,y=250)
             if bandera==0:
                 ventanaNo=Tk()
                 ventanaNo.title('No se encontró el estudiante')
@@ -182,6 +227,7 @@ def actualizarEstudiante():
                 labelNo.place(x=20,y=150)
                 ventanaNo.configure(bg='red')
                 ventanaNo.mainloop()
+
         botonAceptar=Button(ventana5,text='Aceptar',width=18,height=2,command=buscarCarnetPrimerIngreso)
         botonAceptar.place(x=190,y=220) 
     def pedirCarnetMentor():
