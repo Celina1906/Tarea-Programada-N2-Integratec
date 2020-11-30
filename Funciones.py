@@ -165,7 +165,7 @@ def crearMatMentores(matrizSedesEst,diccPrimerIngreso,matrizMentores):
     for sede in matrizSedesEst:
         for carrera in sede[2]:
             cantEst=sede[2][carrera]
-            cantMentores=round(cantEst*0.05)
+            cantMentores=abs(cantEst*0.05)
             while cantMentores>0:
                 carnetsMentores=sacarCarnetsMentores(matrizMentores)
                 datosMentores=sacarDatosMentores(matrizMentores)

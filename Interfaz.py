@@ -96,7 +96,7 @@ def estudiatesDeCarreraPorSede():
     ventana2.geometry('1000x300')
     ventana2.resizable(FALSE,FALSE)
     dicPrimerIngreso=crearDicPrimerIngreso(matrizSedesEst,dicPrimerIngreso)
-    print(dicPrimerIngreso)
+    #print(dicPrimerIngreso)
     labelTitulo2 = Label(ventana2, text = "Base de datos creada satisfactoriamente" , bg="blue", fg="yellow", font = ('calibri', 40))
     labelTitulo2.place(x=50,y=50)
     botonVolver=Button(ventana2,text='Volver al menú principal',width=20,height=2,command= lambda:ventana2.destroy())
