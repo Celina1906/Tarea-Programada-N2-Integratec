@@ -135,6 +135,7 @@ def crearDicPrimerIngreso(matrizSedesEst,diccPrimerIngreso):
                 datos=[nombreCompleto,numTel,correo,sedeEst,carreraEst,carnetMentor]
                 diccPrimerIngreso[carnet]=datos
                 cantEst-=1
+    print(diccPrimerIngreso)
     return diccPrimerIngreso
 
 def sacarDatosMentores(matrizMentores):
