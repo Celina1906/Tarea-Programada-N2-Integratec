@@ -101,6 +101,7 @@ def estudiatesDeCarreraPorSede():
     labelTitulo2.place(x=50,y=50)
     botonVolver=Button(ventana2,text='Volver al menú principal',width=20,height=2,command= lambda:ventana2.destroy())
     botonVolver.place(x=400,y=200)
+    boton5['state']=NORMAL
     ventana2.mainloop()
 
 def crearMentores():
