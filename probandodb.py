@@ -1,0 +1,8 @@
+import sqlite3
+prueba=[['CTCC', 25, {'Ingeniería en Biotecnología': 1, 'Administración de Empresas': 4, 'Ingeniería en Computación': 1, 'Gestión en Turismo Sostenible': 2, 'Enseñanza de la Matemática con Entornos Tecnológicos': 1, 'Administración de Tecnología de Información': 1, 'Ingeniería Agrícola': 0, 'Ingeniería Ambiental': 2, 'Ingeniería en Electrónica': 1, 'Ingeniería Agronegocios': 2, 'Ingeniería en Computadores': 1, 'Ingeniería en Construcción': 2, 'Ingeniería en Diseño Industrial': 0, 'Ingeniería en Materiales': 1, 'Ingeniería en Producción Industrial': 2, 'Ingeniería en Seguridad Laboral e Higiene Ambiental': 1, 'Ingeniería Física': 1, 'Ingeniería Forestal': 1, 'Ingeniería Mecatrónica': 0, 'Ingeniería en Mantenimiento Industrial': 1}], ['CTLSC', 25, {'Administración de Empresas': 7, 'Ingeniería en Computación': 5, 'Gestión en Turismo Rural Sostenible': 5, 'Ingeniería en Electrónica': 4, 'Ingeniería en Agronomía': 4, 'Ingeniería en Producción Industrial': 0}], ['CTLSJ', 25, {'Arquitectura y Urbanismo': 8, 'Administración de Empresas': 11, 'Ingeniería en Computación': 6}], ['CAA', 25, {'Ingeniería en Computación': 14, 'Ingeniería en Electrónica': 11}], ['CAL', 25, {'Administración de Empresas': 11, 'Ingeniería en Computación': 6, 'Ingeniería en Producción de Industrial': 8}]]
+
+import csv
+writer = csv.writer(open("out.csv", 'w'))
+writer.writerow(['name', 'address', 'phone', 'etc'])
+writer.writerow(['bob', '2 main st', '703', 'yada'])
+writer.writerow(['mary', '3 main st', '704', 'yada'])

@@ -74,6 +74,7 @@ def crearMatrizGeneral(MatrizCarreras, listaCantidad, listaSede):
                 dicA[j]=0
             dicA=crearDiccionario(listaCantidad[4],dicA)
             matrizA.append(dicA)  
+    print([matrizCAR,matrizSC,matrizSJ,matrizA,matrizL])
     return [matrizCAR,matrizSC,matrizSJ,matrizA,matrizL]
 
 
