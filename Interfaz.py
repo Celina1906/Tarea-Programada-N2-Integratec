@@ -116,8 +116,12 @@ def crearMentores():
     labelTitulo3.place(x=50,y=50)
     botonVolver=Button(ventana3,text='Volver al menú principal',width=20,height=2,command= lambda:ventana3.destroy())
     botonVolver.place(x=400,y=200)
+    boton4['state']=NORMAL
     ventana3.mainloop()
-
+def asignarMentor():
+    global dicPrimerIngreso,matrizMentores 
+    dicPrimerIngreso=asignarMentores(matrizMentores,dicPrimerIngreso)
+    print(dicPrimerIngreso)
 #Función botón 5
 def actualizarEstudiante():
     ventana5=Tk()
@@ -178,7 +182,7 @@ def actualizarEstudiante():
                 ventanaNo.configure(bg='red')
                 ventanaNo.mainloop()
         botonAceptar=Button(ventana5,text='Aceptar',width=18,height=2,command=buscarCarnetPrimerIngreso)
-        botonAceptar.place(x=190,y=220)
+        botonAceptar.place(x=190,y=220) 
     def pedirCarnetMentor():
         ventana5=Tk()
         ventana5.config(bg='blue')
@@ -250,7 +254,7 @@ def generarReportes():
 boton1=Button(ventanaPrincipal,text='1. Estudiantes por sede',width=18,height=2, command=estudiantesPorSede)
 boton2=Button(ventanaPrincipal,text='2. Estudiantes de carrera por sede',state=DISABLED,width=25,height=2,command=estudiatesDeCarreraPorSede)
 boton3=Button(ventanaPrincipal,text='3. Crear mentores', state=DISABLED,width=14,height=2,command=crearMentores)
-boton4=Button(ventanaPrincipal,text='4. Asignar mentores',state=DISABLED,width=16,height=2)
+boton4=Button(ventanaPrincipal,text='4. Asignar mentores',state=DISABLED,width=16,height=2,command=asignarMentor)
 boton5=Button(ventanaPrincipal,text='5. Actualizar estudiante',state=DISABLED,width=18,height=2, command=actualizarEstudiante)
 boton6=Button(ventanaPrincipal,text='6. Generar reportes',width=18,height=2,command=generarReportes)
 boton7=Button(ventanaPrincipal,text='7. Crear base de datos en Excel',width=25,height=2)
