@@ -10,6 +10,7 @@ matrizSedesYCarreras=quitaRepetidos(obtenerCarreras())
 matrizSedesEst=[]
 dicPrimerIngreso={}
 matrizMentores=[['CTCC',{}],['CTLSC',{}],['CTLSJ',{}],['CAA',{}],['CAL',{}]]
+ultimoArchivoCreado=None
 #Ventana Principal
 ventanaPrincipal=Tk()
 ventanaPrincipal.title('Integratec')

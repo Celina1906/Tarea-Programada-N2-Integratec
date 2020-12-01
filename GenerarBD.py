@@ -2,6 +2,7 @@ import csv
 import datetime
 def crearDB(dic,dicMentores):
     tiempo=datetime.datetime.now()
+    nombreArchivo=""
     with open("BDIntegraTEC" + str(tiempo.day) +"-"+ str(tiempo.month) +"-"+ str(tiempo.year) +"_"+str(tiempo.hour) +"-"+ str(tiempo.minute) +".csv","w",newline="") as cvsfile:
         nombreDeCampos=["Sede","Carrera","Carné","Nombre","Correo","Teléfono","Mentor"]
         escribir= csv.DictWriter(cvsfile,fieldnames=nombreDeCampos)
@@ -13,7 +14,8 @@ def crearDB(dic,dicMentores):
         #ToDO: De momento espera una matriz igual a estudiantes, sin embargo es facilmente adaptable, TRUE al final añadido
         for i in dicMentores:
             escribir.writerow({"Sede":dicMentores[i][3],"Carrera":dicMentores[i][4],"Carné":i,"Nombre":dicMentores[i][0],"Correo":dicMentores[i][2],"Teléfono":dicMentores[i][1],"Mentor":True})
-        return 
+        nombreArchivo="BDIntegraTEC" + str(tiempo.day) +"-"+ str(tiempo.month) +"-"+ str(tiempo.year) +"_"+str(tiempo.hour) +"-"+ str(tiempo.minute) +".csv"
+        return nombreArchivo
 
 prueba={
     2021017930: ['Zelma Griffin Dean',
