@@ -253,7 +253,7 @@ def actualizarEstudiante():
         labelCarnet.place(x=120,y=130)
         entryCarnet=Entry(ventana5)
         entryCarnet.place(x=300,y=130,width=140,height=30)
-        def buscarCarnetMentor():#!Función provisional Hay que revisarla!!!
+        def buscarCarnetMentor():
             global matrizMentores 
             bandera=0   
             for sede in matrizMentores:
@@ -275,7 +275,7 @@ def actualizarEstudiante():
                         labelCorreo.place(x=50,y=200)
                         entryCorreo=Entry(ventanaActualizar)
                         entryCorreo.place(x=360,y=200,width=200,height=30)
-                        def actualizarMentor():#!Falta hacer evidentemente pero mejor lo pongo por si acaso
+                        def actualizarMentor():
                             if not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo.get()):
                                 ventanaError=Tk()
                                 ventanaError.title('ERROR')
