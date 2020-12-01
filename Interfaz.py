@@ -103,7 +103,7 @@ def estudiatesDeCarreraPorSede():
     botonVolver.place(x=400,y=200)
     boton5['state']=NORMAL
     ventana2.mainloop()
-
+#FUnción botón 3
 def crearMentores():
     global matrizSedesEst, dicPrimerIngreso,matrizMentores 
     matrizMentores=crearMatMentores(matrizSedesEst,dicPrimerIngreso,matrizMentores)
@@ -119,6 +119,7 @@ def crearMentores():
     botonVolver.place(x=400,y=200)
     boton4['state']=NORMAL
     ventana3.mainloop()
+#Función botón 4
 def asignarMentor():
     global dicPrimerIngreso,matrizMentores 
     dicPrimerIngreso=asignarMentores(matrizMentores,dicPrimerIngreso)
@@ -186,7 +187,7 @@ def actualizarEstudiante():
                             ventanaError.title('ERROR')
                             ventanaError.geometry('600x300')
                             ventanaError.resizable(FALSE,FALSE)
-                            labelError=Label(ventanaError,text='ERROR: Dato ingresado no válido ', bg='red', font=('arial',20))
+                            labelError=Label(ventanaError,text='ERROR: El formato del número de teléfono no es válido ', bg='red', font=('arial',20))
                             labelError.place(x=50,y=150)
                             ventanaError.configure(bg='red')
                             ventanaError.mainloop()
@@ -197,7 +198,18 @@ def actualizarEstudiante():
                             ventanaError.title('ERROR')
                             ventanaError.geometry('600x300')
                             ventanaError.resizable(FALSE,FALSE)
-                            labelError=Label(ventanaError,text='ERROR: Datos ingresado no válido ', bg='red', font=('arial',20))
+                            labelError=Label(ventanaError,text='ERROR: El formato del número de teléfono o del correo no es válido ', bg='red', font=('arial',20))
+                            labelError.place(x=50,y=150)
+                            ventanaError.configure(bg='red')
+                            ventanaError.mainloop()
+                            botonAceptarAc=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarPrimerIngreso)
+                            botonAceptarAc.place(x=260,y=380)
+                        elif entryCorreo.get() in sacarDatosMentores(matrizMentores) or entryCorreo.get() in sacarDatosPrimerIngreso(dicPrimerIngreso) or  int(entryTelefono.get()) in sacarDatosPrimerIngreso(dicPrimerIngreso):
+                            ventanaError=Tk()
+                            ventanaError.title('ERROR')
+                            ventanaError.geometry('600x300')
+                            ventanaError.resizable(FALSE,FALSE)
+                            labelError=Label(ventanaError,text='ERROR: Datos ingresados repetidos  ', bg='red', font=('arial',20))
                             labelError.place(x=50,y=150)
                             ventanaError.configure(bg='red')
                             ventanaError.mainloop()
@@ -208,16 +220,16 @@ def actualizarEstudiante():
                             dicPrimerIngreso[int(entryCarnet.get())][1]=int(entryTelefono.get())
                             dicPrimerIngreso[int(entryCarnet.get())][2]=entryCorreo.get()
                             print(dicPrimerIngreso)
-                            ventanaCambio2=Tk()
-                            ventanaCambio2.title('Datos cambiados')
-                            ventanaCambio2.geometry('600x300')
-                            ventanaCambio2.resizable(FALSE,FALSE)
-                            labelCambio=Label(ventanaError,text='Datos cambiados con éxito ', bg='blue', font=('arial',20))
+                            ventanaCambio=Tk()
+                            ventanaCambio.title('Datos cambiados')
+                            ventanaCambio.geometry('600x300')
+                            ventanaCambio.resizable(FALSE,FALSE)
+                            labelCambio=Label(ventanaCambio,text='Datos cambiados con éxito ', bg='blue', font=('arial',20))
                             labelCambio.place(x=50,y=150)
-                            ventanaCambio2.configure(bg='blue')
-                            ventanaCambio2.mainloop()
+                            ventanaCambio.configure(bg='blue')
+                            ventanaCambio.mainloop()
                     botonAceptar2=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarPrimerIngreso)
-                    botonAceptar2.place(x=220,y=250)
+                    botonAceptar2.place(x=240,y=320)
             if bandera==0:
                 ventanaNo=Tk()
                 ventanaNo.title('No se encontró el estudiante')
@@ -227,7 +239,6 @@ def actualizarEstudiante():
                 labelNo.place(x=20,y=150)
                 ventanaNo.configure(bg='red')
                 ventanaNo.mainloop()
-
         botonAceptar=Button(ventana5,text='Aceptar',width=18,height=2,command=buscarCarnetPrimerIngreso)
         botonAceptar.place(x=190,y=220) 
     def pedirCarnetMentor():
@@ -245,28 +256,59 @@ def actualizarEstudiante():
         def buscarCarnetMentor():#!Función provisional Hay que revisarla!!!
             global matrizMentores 
             bandera=0   
-            for estudiante in matrizMentores:
-                if estudiante==entryCarnet.get():
-                    bandera=1
-                    ventanaActualizar=Tk()
-                    ventanaActualizar.config(bg='blue')
-                    ventanaActualizar.title('Actualizar metor')
-                    ventanaActualizar.geometry('700x400')
-                    ventanaActualizar.resizable(FALSE,FALSE)
-                    labelTitulo=Label(ventanaActualizar,text='Actualizar mentor', bg='blue',fg="yellow", font=('arial',20))
-                    labelTitulo.place(x=200,y=50)
-                    labelNombre=Label(ventanaActualizar,text='Nombre completo del mentor: ',bg='blue',font=('',15))
-                    labelNombre.place(x=50,y=130)
-                    entryNombre=Entry(ventanaActualizar)
-                    entryNombre.place(x=360,y=130,width=200,height=30)
-                    labelCorreo=Label(ventanaActualizar,text='Correo del mentor: ',bg='blue',font=('',15))
-                    labelCorreo.place(x=50,y=200)
-                    entryCorreo=Entry(ventanaActualizar)
-                    entryCorreo.place(x=360,y=200,width=200,height=30)
-                    def actualizarMentor():#!Falta hacer evidentemente pero mejor lo pongo por si acaso
-                        return
-                    botonAceptarAc=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarMentor)
-                    botonAceptarAc.place(x=260,y=330)
+            for sede in matrizMentores:
+                for estudiante in sede[1]:
+                    if estudiante==int(entryCarnet.get()):
+                        bandera=1
+                        ventanaActualizar=Tk()
+                        ventanaActualizar.config(bg='blue')
+                        ventanaActualizar.title('Actualizar metor')
+                        ventanaActualizar.geometry('700x400')
+                        ventanaActualizar.resizable(FALSE,FALSE)
+                        labelTitulo=Label(ventanaActualizar,text='Actualizar mentor', bg='blue',fg="yellow", font=('arial',20))
+                        labelTitulo.place(x=200,y=50)
+                        labelNombre=Label(ventanaActualizar,text='Nombre completo del mentor: ',bg='blue',font=('',15))
+                        labelNombre.place(x=50,y=130)
+                        entryNombre=Entry(ventanaActualizar)
+                        entryNombre.place(x=360,y=130,width=200,height=30)
+                        labelCorreo=Label(ventanaActualizar,text='Correo del mentor: ',bg='blue',font=('',15))
+                        labelCorreo.place(x=50,y=200)
+                        entryCorreo=Entry(ventanaActualizar)
+                        entryCorreo.place(x=360,y=200,width=200,height=30)
+                        def actualizarMentor():#!Falta hacer evidentemente pero mejor lo pongo por si acaso
+                            if not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo.get()):
+                                ventanaError=Tk()
+                                ventanaError.title('ERROR')
+                                ventanaError.geometry('600x300')
+                                ventanaError.resizable(FALSE,FALSE)
+                                labelError=Label(ventanaError,text='ERROR: El formato del correo no es válido ', bg='red', font=('arial',20))
+                                labelError.place(x=50,y=150)
+                                ventanaError.configure(bg='red')
+                                ventanaError.mainloop()
+                            elif entryCorreo.get() in sacarDatosMentores(matrizMentores) or entryCorreo.get() in sacarDatosPrimerIngreso(dicPrimerIngreso):
+                                ventanaError=Tk()
+                                ventanaError.title('ERROR')
+                                ventanaError.geometry('600x300')
+                                ventanaError.resizable(FALSE,FALSE)
+                                labelError=Label(ventanaError,text='ERROR: Datos ingresados repetidos  ', bg='red', font=('arial',20))
+                                labelError.place(x=50,y=150)
+                                ventanaError.configure(bg='red')
+                                ventanaError.mainloop()
+                            else:
+                                sede[1][int(entryCarnet.get())][0]=entryNombre.get()
+                                sede[1][int(entryCarnet.get())][2]=entryCorreo.get()
+                                print(matrizMentores)
+                                ventanaCambio=Tk()
+                                ventanaCambio.title('Datos cambiados')
+                                ventanaCambio.geometry('600x300')
+                                ventanaCambio.resizable(FALSE,FALSE)
+                                labelCambio=Label(ventanaCambio,text='Datos cambiados con éxito ', bg='blue', font=('arial',20))
+                                labelCambio.place(x=50,y=150)
+                                ventanaCambio.configure(bg='blue')
+                                ventanaCambio.mainloop()
+                        botonAceptarAc=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarMentor)
+                        botonAceptarAc.place(x=260,y=330)
+            print(matrizMentores)
             if bandera==0:
                 ventanaNo=Tk()
                 ventanaNo.title('No se encontró el mentor')
@@ -282,7 +324,7 @@ def actualizarEstudiante():
     botonPrimerIngreso.place(x=90,y=130)
     botonMentor=Button(ventana5,text='Mentor',width=20,height=2,command=pedirCarnetMentor)
     botonMentor.place(x=370,y=130)
-    
+#Función botón 6   
 def generarReportes():
     ventana6=Tk()
     ventana6.config(bg='blue')
