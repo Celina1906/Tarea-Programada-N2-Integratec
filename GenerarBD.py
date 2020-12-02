@@ -1,6 +1,6 @@
 import csv
 import datetime
-def crearDB(dic,dicMentores):
+def crearDB(dic,matrizMentores):
     tiempo=datetime.datetime.now()
     nombreArchivo=""
     with open("BDIntegraTEC" + str(tiempo.day) +"-"+ str(tiempo.month) +"-"+ str(tiempo.year) +"_"+str(tiempo.hour) +"-"+ str(tiempo.minute) +".csv","w",newline="") as cvsfile:
@@ -12,8 +12,22 @@ def crearDB(dic,dicMentores):
             escribir.writerow({"Sede":dic[i][3],"Carrera":dic[i][4],"Carné":i,"Nombre":dic[i][0],"Correo":dic[i][2],"Teléfono":dic[i][1],"Mentor":False})
         #!Espera dic Mentores
         #ToDO: De momento espera una matriz igual a estudiantes, sin embargo es facilmente adaptable, TRUE al final añadido
-        for i in dicMentores:
-            escribir.writerow({"Sede":dicMentores[i][3],"Carrera":dicMentores[i][4],"Carné":i,"Nombre":dicMentores[i][0],"Correo":dicMentores[i][2],"Teléfono":dicMentores[i][1],"Mentor":True})
+        print(matrizMentores)
+        for sede in matrizMentores:
+            print(sede)
+            for mentor in sede:
+                print(mentor)
+                if sede[0] == 'CTCC':
+                    nomSede='CAMPUS TECNOLÓGICO CENTRAL CARTAGO'
+                elif sede[0]=='CTLSC':
+                    nomSede='CAMPUS TECNOLÓGICO LOCAL SAN CARLOS'
+                elif sede[0]=='CTLSJ':
+                    nomSede='CAMPUS TECNOLÓGICO LOCAL SAN JOSÉ'
+                elif sede[0]=='CAA':
+                    nomSede='CENTRO ACADÉMICO DE ALAJUELA'
+                else:
+                   nomSede='CENTRO ACADÉMICO DE LIMÓN'
+                escribir.writerow({"Sede":nomSede,"Carrera":sede[1][mentor][1],"Carné":mentor,"Nombre":sede[1][mentor][0],"Correo":sede[1][mentor][2],"Teléfono":'No aplica',"Mentor":True})
         nombreArchivo="BDIntegraTEC" + str(tiempo.day) +"-"+ str(tiempo.month) +"-"+ str(tiempo.year) +"_"+str(tiempo.hour) +"-"+ str(tiempo.minute) +".csv"
         return nombreArchivo
 
@@ -420,4 +434,4 @@ prueba={
     ]
 }
 
-crearDB(prueba,prueba)
+#crearDB(prueba,prueba)

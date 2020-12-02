@@ -5,6 +5,7 @@
 #Importaciones
 from tkinter import*
 from funciones import *
+from GenerarBD import *
 #Variables globales
 matrizSedesYCarreras=quitaRepetidos(obtenerCarreras())
 matrizSedesEst=[]
@@ -104,7 +105,7 @@ def estudiatesDeCarreraPorSede():
     botonVolver.place(x=400,y=200)
     boton5['state']=NORMAL
     ventana2.mainloop()
-#FUnción botón 3
+#Función botón 3
 def crearMentores():
     global matrizSedesEst, dicPrimerIngreso,matrizMentores 
     matrizMentores=crearMatMentores(matrizSedesEst,dicPrimerIngreso,matrizMentores)
@@ -120,6 +121,7 @@ def crearMentores():
     botonVolver.place(x=400,y=200)
     boton4['state']=NORMAL
     ventana3.mainloop()
+print(matrizMentores)
 #Función botón 4
 def asignarMentor():
     global dicPrimerIngreso,matrizMentores 
@@ -182,7 +184,7 @@ def actualizarEstudiante():
                     labelCorreo.place(x=50,y=270)
                     entryCorreo=Entry(ventanaActualizar)
                     entryCorreo.place(x=360,y=270,width=200,height=30)
-                    def actualizarPrimerIngreso():#!Falta hacer evidentemente pero mejor lo pongo por si acaso
+                    def actualizarPrimerIngreso():
                         if not re.match("^\d{8}$",entryTelefono.get()):
                             ventanaError=Tk()
                             ventanaError.title('ERROR')
@@ -340,6 +342,8 @@ def generarReportes():
     botonCarrera.place(x=250,y=150)
     botonMentor=Button(ventana6,text='Reporte por mentor',width=18,height=2)
     botonMentor.place(x=420,y=150)
+    ventana6.mainloop()
+   
 #Creación de botones de pantalla principal
 boton1=Button(ventanaPrincipal,text='1. Estudiantes por sede',width=18,height=2, command=estudiantesPorSede)
 boton2=Button(ventanaPrincipal,text='2. Estudiantes de carrera por sede',state=DISABLED,width=25,height=2,command=estudiatesDeCarreraPorSede)
@@ -347,7 +351,7 @@ boton3=Button(ventanaPrincipal,text='3. Crear mentores', state=DISABLED,width=14
 boton4=Button(ventanaPrincipal,text='4. Asignar mentores',state=DISABLED,width=16,height=2,command=asignarMentor)
 boton5=Button(ventanaPrincipal,text='5. Actualizar estudiante',state=DISABLED,width=18,height=2, command=actualizarEstudiante)
 boton6=Button(ventanaPrincipal,text='6. Generar reportes',width=18,height=2,command=generarReportes)
-boton7=Button(ventanaPrincipal,text='7. Crear base de datos en Excel',width=25,height=2)
+boton7=Button(ventanaPrincipal,text='7. Crear base de datos en Excel',width=25,height=2,command=lambda:crearDB(dicPrimerIngreso,matrizMentores))
 boton8=Button(ventanaPrincipal,text='8. Enviar correo',width=13,height=2)
 boton9=Button(ventanaPrincipal,text='9. Salir',width=10,height=2,command= lambda:ventanaPrincipal.destroy())
 #Colocación de botones de pantalla principal
