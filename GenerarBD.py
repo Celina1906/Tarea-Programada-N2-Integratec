@@ -1,6 +1,17 @@
+#Elaborado por: Leandro Camacho Aguilar y Celina Madrigal Murillo
+#Fecha de Creación: 1/11/2020 8:12pm 
+#Fecha de última Modificación: 5/12/2020 9:32pm
+#Versión: 3.9.0
+#Importaciones
 import csv
 import datetime
+#Funciones
 def crearDB(dic,matriz):
+    '''
+    Funcionamiento: crea la base de datos en Excel
+    Entradas: dicccionario de primeros ingresos y matriz de mentores
+    Salidas: nombre del archico .csv
+    '''
     tiempo=datetime.datetime.now()
     nombreArchivo="BDIntegraTEC" + str(tiempo.day) +"-"+ str(tiempo.month) +"-"+ str(tiempo.year) +"_"+str(tiempo.hour) +"-"+ str(tiempo.minute) +".csv"
     print(nombreArchivo)
