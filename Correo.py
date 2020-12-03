@@ -1,16 +1,26 @@
+#Elaborado por: Leandro Camacho Aguilar y Celina Madrigal Murillo
+#Fecha de Creación: 2/11/2020 7:29pm 
+#Fecha de última Modificación: 5/12/2020 9:32pm
+#Versión: 3.9.0
+#Importaciones
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 def enviarEmail(destinatario,nombreArchivo):
+    '''
+    Funcionamiento: envia el correo con el archivo 
+    Entradas: el correo del destinatario y el nombre del archivo 
+    Salidas: True
+    '''
     # Iniciamos los parámetros del script
     remitente = 'ProyectoIntegraTEC.Taller2020@gmail.com'
     destinatarios = str(destinatario)
-    asunto = '[RPI] Correo de prueba'
-    cuerpo = 'Este es el contenido del mensaje'
-    ruta_adjunto = str(nombreArchivo) + ".csv"
-    nombre_adjunto = str(nombreArchivo) + ".csv"
+    asunto = 'Base de datos en Excell'
+    cuerpo = ''
+    ruta_adjunto = str(nombreArchivo) 
+    nombre_adjunto = str(nombreArchivo)
     # Creamos el objeto mensaje
     mensaje = MIMEMultipart()
     # Establecemos los atributos del mensaje
@@ -19,10 +29,8 @@ def enviarEmail(destinatario,nombreArchivo):
     mensaje['Subject'] = asunto
     # Agregamos el cuerpo del mensaje como objeto MIME de tipo texto
     mensaje.attach(MIMEText(cuerpo, 'plain'))
-    
     # Abrimos el archivo que vamos a adjuntar
     archivo_adjunto = open(ruta_adjunto, 'rb')
-    
     # Creamos un objeto MIME base
     adjunto_MIME = MIMEBase('application', 'octet-stream')
     # Y le cargamos el archivo adjunto
@@ -46,4 +54,3 @@ def enviarEmail(destinatario,nombreArchivo):
     # Cerramos la conexión
     sesion_smtp.quit()
     return True
-enviarEmail("ljafet01@live.com","BDIntegraTEC1-12-2020_9-48")

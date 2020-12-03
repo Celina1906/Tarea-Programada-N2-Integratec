@@ -8,6 +8,7 @@ from funciones import *
 from GenerarBD import *
 from Archrequests import *
 from Archivos import *
+from Correo import *
 #Variables globales
 matrizSedesYCarreras=quitaRepetidos(obtenerCarreras())
 matrizSedesEst=[]
@@ -26,7 +27,12 @@ labelTitulo = Label(ventanaPrincipal, text = "Integratec" , bg="blue", fg="yello
 labelTitulo.place(x=20,y=30)
 #Funciones
 #Función botón 1
-def estudiantesPorSede():   
+def estudiantesPorSede(): 
+    '''
+    Funcionamiento: Define la cantidad de estudiantes de primer ingreso que entran por sede 
+    Entradas: NA
+    Salidas: NA
+    '''  
     ventana1=Tk()
     ventana1.title('Estudiantes por sede')
     ventana1.geometry('800x600')
@@ -58,6 +64,11 @@ def estudiantesPorSede():
     entryLimon=Entry(ventana1)
     entryLimon.place(x=280,y=400)
     def obtenerCantidades():
+        '''
+        Funcionamiento: Revisa si los datos ingresados son correctos y de ser así crea el diccionario de primeros ingresos
+        Entradas: NA
+        Salidas: NA
+        '''  
         global matrizSedesYCarreras
         global matrizSedesEst
         try:
@@ -95,6 +106,11 @@ def estudiantesPorSede():
     ventana1.mainloop()
 #Función botón 2
 def estudiatesDeCarreraPorSede():
+    '''
+    Funcionamiento: Crea dinámicamente la base de datos de todos los admitidos en cada carrera por cada sede 
+    Entradas: NA
+    Salidas: NA
+    '''  
     global matrizSedesEst, dicPrimerIngreso
     ventana2=Tk()
     ventana2.config(bg='blue')
@@ -111,6 +127,11 @@ def estudiatesDeCarreraPorSede():
     ventana2.mainloop()
 #Función botón 3
 def crearMentores():
+    '''
+    Funcionamiento: Dada la cantidad de estudiantes de primer ingreso generados por sede en cada carrera, crea un 5% de mentores en esa carrera es esa sede
+    Entradas: NA
+    Salidas: NA
+    '''  
     global matrizSedesEst, dicPrimerIngreso,matrizMentores 
     matrizMentores=crearMatMentores(matrizSedesEst,dicPrimerIngreso,matrizMentores)
     graba(nomArchivo,matrizMentores)
@@ -128,6 +149,11 @@ def crearMentores():
     ventana3.mainloop()
 #Función botón 4
 def asignarMentor():
+    '''
+    Funcionamiento: asigna a los estudiantes con misma carrera y sede de forma distribuida a los mentores.
+    Entradas: NA
+    Salidas: NA
+    '''  
     global dicPrimerIngreso,matrizMentores 
     dicPrimerIngreso=asignarMentores(matrizMentores,dicPrimerIngreso)
     print(dicPrimerIngreso)
@@ -143,6 +169,11 @@ def asignarMentor():
     ventana4.mainloop()
 #Función botón 5
 def actualizarEstudiante():
+    '''
+    Funcionamiento: modifica los datos de algún estudiante.
+    Entradas: NA
+    Salidas: NA
+    '''  
     ventana5=Tk()
     ventana5.config(bg='blue')
     ventana5.title('Actualizar estudiante')
@@ -151,6 +182,11 @@ def actualizarEstudiante():
     labelTitulo=Label(ventana5,text='Actualizar estudiante', bg='blue',fg="yellow", font=('arial',20))
     labelTitulo.place(x=150,y=50)
     def pedirCarnetPrimerIngreso():
+        '''
+        Funcionamiento: pide el carnet de un primer ingreso.
+        Entradas: NA
+        Salidas: NA
+        '''  
         ventana5=Tk()
         ventana5.config(bg='blue')
         ventana5.title('Actualizar estudiante')
@@ -163,6 +199,11 @@ def actualizarEstudiante():
         entryCarnet=Entry(ventana5)
         entryCarnet.place(x=310,y=130,width=140,height=30)
         def buscarCarnetPrimerIngreso():
+            '''
+            Funcionamiento: busca el carnet de un primer ingreso.
+            Entradas: NA
+            Salidas: NA
+            '''  
             global dicPrimerIngreso 
             bandera=0   
             for estudiante in dicPrimerIngreso:
@@ -199,6 +240,11 @@ def actualizarEstudiante():
                     entryCorreo=Entry(ventanaActualizar)
                     entryCorreo.place(x=360,y=270,width=200,height=30)
                     def actualizarPrimerIngreso():
+                        '''
+                        Funcionamiento: actualiza los datos de un primer ingreso.
+                        Entradas: NA
+                        Salidas: NA
+                        '''  
                         if not re.match("^\d{8}$",entryTelefono.get()):
                             ventanaError=Tk()
                             ventanaError.title('ERROR')
@@ -274,6 +320,11 @@ def actualizarEstudiante():
         botonAceptar=Button(ventana5,text='Aceptar',width=18,height=2,command=buscarCarnetPrimerIngreso)
         botonAceptar.place(x=190,y=220) 
     def pedirCarnetMentor():
+        '''
+        Funcionamiento: pide el carnet a un mentor.
+        Entradas: NA
+        Salidas: NA
+        '''  
         ventana5=Tk()
         ventana5.config(bg='blue')
         ventana5.title('Actualizar estudiante')
@@ -286,6 +337,11 @@ def actualizarEstudiante():
         entryCarnet=Entry(ventana5)
         entryCarnet.place(x=300,y=130,width=140,height=30)
         def buscarCarnetMentor():
+            '''
+            Funcionamiento: busca el carnet de un mentor.
+            Entradas: NA
+            Salidas: NA
+            '''  
             global matrizMentores 
             bandera=0   
             for sede in matrizMentores:
@@ -308,6 +364,11 @@ def actualizarEstudiante():
                         entryCorreo=Entry(ventanaActualizar)
                         entryCorreo.place(x=360,y=200,width=200,height=30)
                         def actualizarMentor():
+                            '''
+                            Funcionamiento: actualiza los datos de un mentor.
+                            Entradas: NA
+                            Salidas: NA
+                            '''  
                             if not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo.get()):
                                 ventanaError=Tk()
                                 ventanaError.title('ERROR')
@@ -374,8 +435,69 @@ def generarReportes():
     ventana6.mainloop()
 #Función botón 7
 def crearBD():
+    '''
+    Funcionamiento: crea la base de datos .csv.
+    Entradas: NA
+    Salidas: NA
+    '''  
     global dicPrimerIngreso, matrizMentores,archivoDB
     archivoDB=crearDB(dicPrimerIngreso,matrizMentores)
+#Función botón 8
+def enviarCorreo():
+    '''
+    Funcionamiento: envia el correo con el archivo .csv.
+    Entradas: NA
+    Salidas: NA
+    ''' 
+    ventana8=Tk()
+    ventana8.config(bg='blue')
+    ventana8.title('Enviar correo')
+    ventana8.geometry('600x300')
+    ventana8.resizable(FALSE,FALSE)
+    labelTitulo=Label(ventana8,text='Enviar correo', bg='blue',fg="yellow", font=('arial',20))
+    labelTitulo.place(x=150,y=50)
+    labelDestinatario=Label(ventana8,text='Correo del destinatario: ',bg='blue',font=('',15))
+    labelDestinatario.place(x=90,y=130)
+    entryDestinatario=Entry(ventana8)
+    entryDestinatario.place(x=300,y=130,width=140,height=30)
+    def verificarCorreo():
+        '''
+        Funcionamiento: verifica que los datos del correo sean correctos.
+        Entradas: NA
+        Salidas: NA
+        ''' 
+        global archivoDB
+        if not re.match("[^@]+@[^@]+\.[^@]+",entryDestinatario.get()):
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('600x300')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: El formato del correo no es válido ', bg='red', font=('arial',20))
+            labelError.place(x=10,y=150)
+            ventanaError.configure(bg='red')
+            ventanaError.mainloop()
+        elif archivoDB=='':
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('600x300')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: No se ha creado una base de datos todavía ', bg='red', font=('arial',20))
+            labelError.place(x=10,y=150)
+            ventanaError.configure(bg='red')
+            ventanaError.mainloop()
+        else: 
+            enviarEmail(entryDestinatario.get(),archivoDB)
+            ventanaCambio=Tk()
+            ventanaCambio.title('Correo enviado')
+            ventanaCambio.geometry('600x300')
+            ventanaCambio.resizable(FALSE,FALSE)
+            labelCambio=Label(ventanaCambio,text='Correo enviado con éxito ', bg='blue', font=('arial',20))
+            labelCambio.place(x=50,y=150)
+            ventanaCambio.configure(bg='blue')
+            ventanaCambio.mainloop()
+    botonAceptar=Button(ventana8,text='Aceptar',width=18,height=2,command=verificarCorreo)
+    botonAceptar.place(x=190,y=190)
+    ventana8.mainloop()
 #Creación de botones de pantalla principal
 boton1=Button(ventanaPrincipal,text='1. Estudiantes por sede',width=18,height=2, command=estudiantesPorSede)
 boton2=Button(ventanaPrincipal,text='2. Estudiantes de carrera por sede',state=DISABLED,width=25,height=2,command=estudiatesDeCarreraPorSede)
@@ -384,7 +506,7 @@ boton4=Button(ventanaPrincipal,text='4. Asignar mentores',state=DISABLED,width=1
 boton5=Button(ventanaPrincipal,text='5. Actualizar estudiante',state=DISABLED,width=18,height=2, command=actualizarEstudiante)
 boton6=Button(ventanaPrincipal,text='6. Generar reportes',width=18,height=2,command=generarReportes)
 boton7=Button(ventanaPrincipal,text='7. Crear base de datos en Excel',width=25,height=2,command=crearBD)
-boton8=Button(ventanaPrincipal,text='8. Enviar correo',width=13,height=2)
+boton8=Button(ventanaPrincipal,text='8. Enviar correo',width=13,height=2,command=enviarCorreo)
 boton9=Button(ventanaPrincipal,text='9. Salir',width=10,height=2,command= lambda:ventanaPrincipal.destroy())
 #Colocación de botones de pantalla principal
 boton1.place(x=25,y=120)
