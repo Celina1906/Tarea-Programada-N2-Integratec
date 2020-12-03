@@ -1,6 +1,6 @@
 import csv
 import datetime
-def crearDB(dic,matrizMentores):
+def crearDB(dic,matriz):
     tiempo=datetime.datetime.now()
     nombreArchivo=""
     with open("BDIntegraTEC" + str(tiempo.day) +"-"+ str(tiempo.month) +"-"+ str(tiempo.year) +"_"+str(tiempo.hour) +"-"+ str(tiempo.minute) +".csv","w",newline="") as cvsfile:
@@ -12,11 +12,8 @@ def crearDB(dic,matrizMentores):
             escribir.writerow({"Sede":dic[i][3],"Carrera":dic[i][4],"Carné":i,"Nombre":dic[i][0],"Correo":dic[i][2],"Teléfono":dic[i][1],"Mentor":False})
         #!Espera dic Mentores
         #ToDO: De momento espera una matriz igual a estudiantes, sin embargo es facilmente adaptable, TRUE al final añadido
-        print(matrizMentores)
-        for sede in matrizMentores:
-            print(sede)
-            for mentor in sede:
-                print(mentor)
+        for sede in matriz:
+            for mentor in sede[1]:
                 if sede[0] == 'CTCC':
                     nomSede='CAMPUS TECNOLÓGICO CENTRAL CARTAGO'
                 elif sede[0]=='CTLSC':

@@ -6,12 +6,15 @@
 from tkinter import*
 from funciones import *
 from GenerarBD import *
+from Archrequests import *
+from Archivos import *
 #Variables globales
 matrizSedesYCarreras=quitaRepetidos(obtenerCarreras())
 matrizSedesEst=[]
 dicPrimerIngreso={}
 matrizMentores=[['CTCC',{}],['CTLSC',{}],['CTLSJ',{}],['CAA',{}],['CAL',{}]]
 ultimoArchivoCreado=None
+nomArchivo='mentores.txt'
 #Ventana Principal
 ventanaPrincipal=Tk()
 ventanaPrincipal.title('Integratec')
@@ -109,6 +112,7 @@ def estudiatesDeCarreraPorSede():
 def crearMentores():
     global matrizSedesEst, dicPrimerIngreso,matrizMentores 
     matrizMentores=crearMatMentores(matrizSedesEst,dicPrimerIngreso,matrizMentores)
+    graba(nomArchivo,matrizMentores)
     print(matrizMentores)
     ventana3=Tk()
     ventana3.config(bg='blue')
@@ -121,12 +125,21 @@ def crearMentores():
     botonVolver.place(x=400,y=200)
     boton4['state']=NORMAL
     ventana3.mainloop()
-print(matrizMentores)
 #Función botón 4
 def asignarMentor():
     global dicPrimerIngreso,matrizMentores 
     dicPrimerIngreso=asignarMentores(matrizMentores,dicPrimerIngreso)
     print(dicPrimerIngreso)
+    ventana4=Tk()
+    ventana4.config(bg='blue')
+    ventana4.title('Crear mentores')
+    ventana4.geometry('1000x300')
+    ventana4.resizable(FALSE,FALSE)
+    labelTitulo4 = Label(ventana4, text = "Mentores asignados satisfactoriamente" , bg="blue", fg="yellow", font = ('calibri', 40))
+    labelTitulo4.place(x=50,y=50)
+    botonVolver=Button(ventana4,text='Volver al menú principal',width=20,height=2,command= lambda:ventana4.destroy())
+    botonVolver.place(x=400,y=200)
+    ventana4.mainloop()
 #Función botón 5
 def actualizarEstudiante():
     ventana5=Tk()
@@ -188,25 +201,39 @@ def actualizarEstudiante():
                         if not re.match("^\d{8}$",entryTelefono.get()):
                             ventanaError=Tk()
                             ventanaError.title('ERROR')
-                            ventanaError.geometry('600x300')
+                            ventanaError.geometry('800x300')
                             ventanaError.resizable(FALSE,FALSE)
-                            labelError=Label(ventanaError,text='ERROR: El formato del número de teléfono no es válido ', bg='red', font=('arial',20))
-                            labelError.place(x=50,y=150)
+                            labelError=Label(ventanaError,text='ERROR1: El formato del número de teléfono no es válido ', bg='red', font=('arial',20))
+                            labelError.place(x=10,y=150)
                             ventanaError.configure(bg='red')
                             ventanaError.mainloop()
                             botonAceptarAc=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarPrimerIngreso)
                             botonAceptarAc.place(x=260,y=380)
-                        elif (entryTelefono.get()[0]!= 6 and entryTelefono.get()[0]!=7 and entryTelefono.get()[0]!=8 and entryTelefono.get()[0]!=9) and not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo.get()):
+                            ventanaError.mainloop()
+                        elif (entryTelefono.get()[0]!='6' and entryTelefono.get()[0]!='7' and entryTelefono.get()[0]!='8' and entryTelefono.get()[0]!='9'):
+                            ventanaError=Tk()
+                            ventanaError.title('ERROR')
+                            ventanaError.geometry('750x300')
+                            ventanaError.resizable(FALSE,FALSE)
+                            labelError=Label(ventanaError,text='ERROR: El formato del número de teléfono no es válido ', bg='red', font=('arial',20))
+                            labelError.place(x=5,y=150)
+                            ventanaError.configure(bg='red')
+                            ventanaError.mainloop()
+                            botonAceptarAc=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarPrimerIngreso)
+                            botonAceptarAc.place(x=260,y=380)
+                            ventanaError.mainloop()
+                        elif not re.match("[^@]+@[^@]+\.[^@]+",entryCorreo.get()):
                             ventanaError=Tk()
                             ventanaError.title('ERROR')
                             ventanaError.geometry('600x300')
                             ventanaError.resizable(FALSE,FALSE)
-                            labelError=Label(ventanaError,text='ERROR: El formato del número de teléfono o del correo no es válido ', bg='red', font=('arial',20))
-                            labelError.place(x=50,y=150)
+                            labelError=Label(ventanaError,text='ERROR: El formato del correo no es válido ', bg='red', font=('arial',20))
+                            labelError.place(x=5,y=150)
                             ventanaError.configure(bg='red')
                             ventanaError.mainloop()
                             botonAceptarAc=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarPrimerIngreso)
                             botonAceptarAc.place(x=260,y=380)
+                            ventanaError.mainloop()
                         elif entryCorreo.get() in sacarDatosMentores(matrizMentores) or entryCorreo.get() in sacarDatosPrimerIngreso(dicPrimerIngreso) or  int(entryTelefono.get()) in sacarDatosPrimerIngreso(dicPrimerIngreso):
                             ventanaError=Tk()
                             ventanaError.title('ERROR')
@@ -218,6 +245,7 @@ def actualizarEstudiante():
                             ventanaError.mainloop()
                             botonAceptarAc=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarPrimerIngreso)
                             botonAceptarAc.place(x=260,y=380)
+                            ventanaError.mainloop()
                         else:
                             dicPrimerIngreso[int(entryCarnet.get())][0]=entryNombre.get()
                             dicPrimerIngreso[int(entryCarnet.get())][1]=int(entryTelefono.get())
@@ -298,8 +326,8 @@ def actualizarEstudiante():
                                 ventanaError.configure(bg='red')
                                 ventanaError.mainloop()
                             else:
-                                sede[1][int(entryCarnet.get())][0]=entryNombre.get()
-                                sede[1][int(entryCarnet.get())][2]=entryCorreo.get()
+                                sede[1][estudiante][0]=entryNombre.get()
+                                sede[1][estudiante][2]=entryCorreo.get()
                                 print(matrizMentores)
                                 ventanaCambio=Tk()
                                 ventanaCambio.title('Datos cambiados')
@@ -343,7 +371,10 @@ def generarReportes():
     botonMentor=Button(ventana6,text='Reporte por mentor',width=18,height=2)
     botonMentor.place(x=420,y=150)
     ventana6.mainloop()
-   
+#Función botón 7
+def crearBD():
+    global dicPrimerIngreso, matrizMentores
+    crearDB(dicPrimerIngreso,matrizMentores)
 #Creación de botones de pantalla principal
 boton1=Button(ventanaPrincipal,text='1. Estudiantes por sede',width=18,height=2, command=estudiantesPorSede)
 boton2=Button(ventanaPrincipal,text='2. Estudiantes de carrera por sede',state=DISABLED,width=25,height=2,command=estudiatesDeCarreraPorSede)
@@ -351,7 +382,7 @@ boton3=Button(ventanaPrincipal,text='3. Crear mentores', state=DISABLED,width=14
 boton4=Button(ventanaPrincipal,text='4. Asignar mentores',state=DISABLED,width=16,height=2,command=asignarMentor)
 boton5=Button(ventanaPrincipal,text='5. Actualizar estudiante',state=DISABLED,width=18,height=2, command=actualizarEstudiante)
 boton6=Button(ventanaPrincipal,text='6. Generar reportes',width=18,height=2,command=generarReportes)
-boton7=Button(ventanaPrincipal,text='7. Crear base de datos en Excel',width=25,height=2,command=lambda:crearDB(dicPrimerIngreso,matrizMentores))
+boton7=Button(ventanaPrincipal,text='7. Crear base de datos en Excel',width=25,height=2,command=crearBD)
 boton8=Button(ventanaPrincipal,text='8. Enviar correo',width=13,height=2)
 boton9=Button(ventanaPrincipal,text='9. Salir',width=10,height=2,command= lambda:ventanaPrincipal.destroy())
 #Colocación de botones de pantalla principal
