@@ -7,8 +7,8 @@ def enviarEmail(destinatario,nombreArchivo):
     # Iniciamos los parámetros del script
     remitente = 'ProyectoIntegraTEC.Taller2020@gmail.com'
     destinatarios = str(destinatario)
-    asunto = '[RPI] Correo de prueba'
-    cuerpo = 'Este es el contenido del mensaje'
+    asunto = 'Base de datos en Excell'
+    cuerpo = ''
     ruta_adjunto = str(nombreArchivo) 
     nombre_adjunto = str(nombreArchivo)
     # Creamos el objeto mensaje

@@ -387,7 +387,7 @@ def enviarCorreo():
     labelTitulo=Label(ventana8,text='Enviar correo', bg='blue',fg="yellow", font=('arial',20))
     labelTitulo.place(x=150,y=50)
     labelDestinatario=Label(ventana8,text='Correo del destinatario: ',bg='blue',font=('',15))
-    labelDestinatario.place(x=120,y=130)
+    labelDestinatario.place(x=90,y=130)
     entryDestinatario=Entry(ventana8)
     entryDestinatario.place(x=300,y=130,width=140,height=30)
     def verificarCorreo():
@@ -398,7 +398,7 @@ def enviarCorreo():
             ventanaError.geometry('600x300')
             ventanaError.resizable(FALSE,FALSE)
             labelError=Label(ventanaError,text='ERROR: El formato del correo no es válido ', bg='red', font=('arial',20))
-            labelError.place(x=50,y=150)
+            labelError.place(x=10,y=150)
             ventanaError.configure(bg='red')
             ventanaError.mainloop()
         elif archivoDB=='':
@@ -407,7 +407,7 @@ def enviarCorreo():
             ventanaError.geometry('600x300')
             ventanaError.resizable(FALSE,FALSE)
             labelError=Label(ventanaError,text='ERROR: No se ha creado una base de datos todavía ', bg='red', font=('arial',20))
-            labelError.place(x=50,y=150)
+            labelError.place(x=10,y=150)
             ventanaError.configure(bg='red')
             ventanaError.mainloop()
         else: 
