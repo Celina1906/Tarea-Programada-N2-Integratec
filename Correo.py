@@ -9,16 +9,14 @@ def enviarEmail(destinatario,nombreArchivo):
     destinatarios = str(destinatario)
     asunto = '[RPI] Correo de prueba'
     cuerpo = 'Este es el contenido del mensaje'
-    ruta_adjunto = str(nombreArchivo)
-    nombre_adjunto = str(nombreArchivo)
+    ruta_adjunto = str(nombreArchivo) + ".csv"
+    nombre_adjunto = str(nombreArchivo) + ".csv"
     # Creamos el objeto mensaje
     mensaje = MIMEMultipart()
-    
     # Establecemos los atributos del mensaje
     mensaje['From'] = remitente
     mensaje['To'] = ", ".join(destinatarios)
     mensaje['Subject'] = asunto
-    
     # Agregamos el cuerpo del mensaje como objeto MIME de tipo texto
     mensaje.attach(MIMEText(cuerpo, 'plain'))
     
@@ -40,7 +38,7 @@ def enviarEmail(destinatario,nombreArchivo):
     # Ciframos la conexión
     sesion_smtp.starttls()
     # Iniciamos sesión en el servidor
-    sesion_smtp.login('rpi.mailer.1@gmail.com','una contraseña segura')
+    sesion_smtp.login('ProyectoIntegraTEC.Taller2020@gmail.com',"celinaleandro")
     # Convertimos el objeto mensaje a texto
     texto = mensaje.as_string()
     # Enviamos el mensaje
