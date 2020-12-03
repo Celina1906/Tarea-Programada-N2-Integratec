@@ -8,6 +8,7 @@ from funciones import *
 from GenerarBD import *
 from Archrequests import *
 from Archivos import *
+from Correo import *
 #Variables globales
 matrizSedesYCarreras=quitaRepetidos(obtenerCarreras())
 matrizSedesEst=[]
@@ -376,6 +377,52 @@ def generarReportes():
 def crearBD():
     global dicPrimerIngreso, matrizMentores,archivoDB
     archivoDB=crearDB(dicPrimerIngreso,matrizMentores)
+#Función botón 8
+def enviarCorreo():
+    ventana8=Tk()
+    ventana8.config(bg='blue')
+    ventana8.title('Enviar correo')
+    ventana8.geometry('600x300')
+    ventana8.resizable(FALSE,FALSE)
+    labelTitulo=Label(ventana8,text='Enviar correo', bg='blue',fg="yellow", font=('arial',20))
+    labelTitulo.place(x=150,y=50)
+    labelDestinatario=Label(ventana8,text='Correo del destinatario: ',bg='blue',font=('',15))
+    labelDestinatario.place(x=120,y=130)
+    entryDestinatario=Entry(ventana8)
+    entryDestinatario.place(x=300,y=130,width=140,height=30)
+    def verificarCorreo():
+        global archivoDB
+        if not re.match("[^@]+@[^@]+\.[^@]+",entryDestinatario.get()):
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('600x300')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: El formato del correo no es válido ', bg='red', font=('arial',20))
+            labelError.place(x=50,y=150)
+            ventanaError.configure(bg='red')
+            ventanaError.mainloop()
+        elif archivoDB=='':
+            ventanaError=Tk()
+            ventanaError.title('ERROR')
+            ventanaError.geometry('600x300')
+            ventanaError.resizable(FALSE,FALSE)
+            labelError=Label(ventanaError,text='ERROR: No se ha creado una base de datos todavía ', bg='red', font=('arial',20))
+            labelError.place(x=50,y=150)
+            ventanaError.configure(bg='red')
+            ventanaError.mainloop()
+        else: 
+            enviarEmail(entryDestinatario.get(),archivoDB)
+            ventanaCambio=Tk()
+            ventanaCambio.title('Correo enviado')
+            ventanaCambio.geometry('600x300')
+            ventanaCambio.resizable(FALSE,FALSE)
+            labelCambio=Label(ventanaCambio,text='Correo enviado con éxito ', bg='blue', font=('arial',20))
+            labelCambio.place(x=50,y=150)
+            ventanaCambio.configure(bg='blue')
+            ventanaCambio.mainloop()
+    botonAceptar=Button(ventana8,text='Aceptar',width=18,height=2,command=verificarCorreo)
+    botonAceptar.place(x=190,y=190)
+    ventana8.mainloop()
 #Creación de botones de pantalla principal
 boton1=Button(ventanaPrincipal,text='1. Estudiantes por sede',width=18,height=2, command=estudiantesPorSede)
 boton2=Button(ventanaPrincipal,text='2. Estudiantes de carrera por sede',state=DISABLED,width=25,height=2,command=estudiatesDeCarreraPorSede)
@@ -384,7 +431,7 @@ boton4=Button(ventanaPrincipal,text='4. Asignar mentores',state=DISABLED,width=1
 boton5=Button(ventanaPrincipal,text='5. Actualizar estudiante',state=DISABLED,width=18,height=2, command=actualizarEstudiante)
 boton6=Button(ventanaPrincipal,text='6. Generar reportes',width=18,height=2,command=generarReportes)
 boton7=Button(ventanaPrincipal,text='7. Crear base de datos en Excel',width=25,height=2,command=crearBD)
-boton8=Button(ventanaPrincipal,text='8. Enviar correo',width=13,height=2)
+boton8=Button(ventanaPrincipal,text='8. Enviar correo',width=13,height=2,command=enviarCorreo)
 boton9=Button(ventanaPrincipal,text='9. Salir',width=10,height=2,command= lambda:ventanaPrincipal.destroy())
 #Colocación de botones de pantalla principal
 boton1.place(x=25,y=120)

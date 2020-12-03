@@ -9,8 +9,8 @@ def enviarEmail(destinatario,nombreArchivo):
     destinatarios = str(destinatario)
     asunto = '[RPI] Correo de prueba'
     cuerpo = 'Este es el contenido del mensaje'
-    ruta_adjunto = str(nombreArchivo) + ".csv"
-    nombre_adjunto = str(nombreArchivo) + ".csv"
+    ruta_adjunto = str(nombreArchivo) 
+    nombre_adjunto = str(nombreArchivo)
     # Creamos el objeto mensaje
     mensaje = MIMEMultipart()
     # Establecemos los atributos del mensaje
@@ -46,4 +46,4 @@ def enviarEmail(destinatario,nombreArchivo):
     # Cerramos la conexión
     sesion_smtp.quit()
     return True
-enviarEmail("ljafet01@live.com","BDIntegraTEC1-12-2020_9-48")
+#enviarEmail("ljafet01@live.com","BDIntegraTEC1-12-2020_9-48")
