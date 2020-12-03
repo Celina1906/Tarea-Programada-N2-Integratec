@@ -2,7 +2,8 @@ import csv
 import datetime
 def crearDB(dic,matriz):
     tiempo=datetime.datetime.now()
-    nombreArchivo=""
+    nombreArchivo="BDIntegraTEC" + str(tiempo.day) +"-"+ str(tiempo.month) +"-"+ str(tiempo.year) +"_"+str(tiempo.hour) +"-"+ str(tiempo.minute) +".csv"
+    print(nombreArchivo)
     with open("BDIntegraTEC" + str(tiempo.day) +"-"+ str(tiempo.month) +"-"+ str(tiempo.year) +"_"+str(tiempo.hour) +"-"+ str(tiempo.minute) +".csv","w",newline="") as cvsfile:
         nombreDeCampos=["Sede","Carrera","Carné","Nombre","Correo","Teléfono","Mentor"]
         escribir= csv.DictWriter(cvsfile,fieldnames=nombreDeCampos)

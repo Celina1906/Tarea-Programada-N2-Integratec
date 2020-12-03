@@ -15,6 +15,7 @@ dicPrimerIngreso={}
 matrizMentores=[['CTCC',{}],['CTLSC',{}],['CTLSJ',{}],['CAA',{}],['CAL',{}]]
 ultimoArchivoCreado=None
 nomArchivo='mentores.txt'
+archivoDB=""
 #Ventana Principal
 ventanaPrincipal=Tk()
 ventanaPrincipal.title('Integratec')
@@ -373,8 +374,8 @@ def generarReportes():
     ventana6.mainloop()
 #Función botón 7
 def crearBD():
-    global dicPrimerIngreso, matrizMentores
-    crearDB(dicPrimerIngreso,matrizMentores)
+    global dicPrimerIngreso, matrizMentores,archivoDB
+    archivoDB=crearDB(dicPrimerIngreso,matrizMentores)
 #Creación de botones de pantalla principal
 boton1=Button(ventanaPrincipal,text='1. Estudiantes por sede',width=18,height=2, command=estudiantesPorSede)
 boton2=Button(ventanaPrincipal,text='2. Estudiantes de carrera por sede',state=DISABLED,width=25,height=2,command=estudiatesDeCarreraPorSede)
