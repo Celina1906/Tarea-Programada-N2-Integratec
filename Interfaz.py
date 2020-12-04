@@ -346,6 +346,17 @@ def actualizarEstudiante():
             bandera=0   
             for sede in matrizMentores:
                 for estudiante in sede[1]:
+                    try:
+                        int(entryCarnet.get())
+                    except:
+                        ventanaError=Tk()
+                        ventanaError.title('ERROR')
+                        ventanaError.geometry('600x300')
+                        ventanaError.resizable(FALSE,FALSE)
+                        labelError=Label(ventanaError,text='ERROR: Dato ingresado no válido ', bg='red', font=('arial',20))
+                        labelError.place(x=50,y=150)
+                        ventanaError.configure(bg='red')
+                        ventanaError.mainloop()
                     if estudiante==int(entryCarnet.get()):
                         bandera=1
                         ventanaActualizar=Tk()
