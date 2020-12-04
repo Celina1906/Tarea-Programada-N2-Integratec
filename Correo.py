@@ -17,8 +17,8 @@ def enviarEmail(destinatario,nombreArchivo):
     # Iniciamos los parámetros del script
     remitente = 'ProyectoIntegraTEC.Taller2020@gmail.com'
     destinatarios = str(destinatario)
-    asunto = 'Base de datos en Excell'
-    cuerpo = ''
+    asunto = 'Base de datos en Excel'
+    cuerpo = 'Saludos encargado, se le adjunta la base de datos con los estudiantes y mentores inscritos a día de hoy.\n¡Los programadores le desean un hermoso día! \n\n\n\n ¡No responda a este mensaje, ha sido generado automaticamente!.'
     ruta_adjunto = str(nombreArchivo) 
     nombre_adjunto = str(nombreArchivo)
     # Creamos el objeto mensaje
