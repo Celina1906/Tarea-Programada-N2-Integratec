@@ -9,6 +9,7 @@ from GenerarBD import *
 from Archrequests import *
 from Archivos import *
 from Correo import *
+from Registros import registroCarrera,registroSede,registroMentor
 #Variables globales
 matrizSedesYCarreras=quitaRepetidos(obtenerCarreras())
 matrizSedesEst=[]
@@ -436,6 +437,7 @@ def generarReportes():
     Entradas: NA
     Salidas: NA
     '''  
+    global dicPrimerIngreso,matrizMentores
     ventana6=Tk()
     ventana6.config(bg='Teal')
     ventana6.title('Generar reportes')
@@ -449,6 +451,8 @@ def generarReportes():
         Entradas: NA
         Salidas: NA
         '''  
+        global dicPrimerIngreso
+        registroSede(dicPrimerIngreso)
         ventanaExito=Tk()
         ventanaExito.title('Reporte Generado')
         ventanaExito.geometry('550x150')
@@ -463,6 +467,8 @@ def generarReportes():
         Entradas: NA
         Salidas: NA
         '''  
+        global dicPrimerIngreso
+        registroCarrera(dicPrimerIngreso)
         ventanaExito=Tk()
         ventanaExito.title('Reporte Generado')
         ventanaExito.geometry('550x150')
@@ -472,11 +478,13 @@ def generarReportes():
         ventanaExito.configure(bg='Teal')
         ventanaExito.mainloop()
     def reporteMentor():
+        global dicPrimerIngreso, matrizMentores
         '''
         Funcionamiento: genera el reporte por mentor.
         Entradas: NA
         Salidas: NA
         '''  
+        registroMentor(dicPrimerIngreso,matrizMentores)
         ventanaExito=Tk()
         ventanaExito.title('Reporte Generado')
         ventanaExito.geometry('550x150')

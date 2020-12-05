@@ -1,6 +1,6 @@
 import webbrowser,time
 
-def reporteMentor(diccionario,matrizMentores):
+def registroMentor(diccionario,matrizMentores):
     """
     Funcion:Guarda el archivo 
     Entrada:El nombre del archivo y la lista con los elementos
@@ -44,7 +44,7 @@ def buscarMentor(carnet,matrizMentores):
             if j==carnet:
                 return i[1][j][0]
 
-def reporteCarrera(diccionario):
+def registroCarrera(diccionario):
     """
     Funcion:Guarda el archivo 
     Entrada:El nombre del archivo y la lista con los elementos
@@ -70,18 +70,18 @@ def reporteCarrera(diccionario):
         if (diccionario[i][4] + diccionario[i][3]) not in listaCarreras:
             listaCarreras.append(diccionario[i][4] + diccionario[i][3])
             f.writelines('\t<li>'+'Carrera: '+str(diccionario[i][4])+'</li>\n')
-            f.writelines('\t\t<ol>\n')
+            f.writelines('\t\t<ul>\n')
             for j in diccionario:
                 if diccionario[i][5] in diccionario[j]:
                     f.writelines('\t\t\t<li>'+str(diccionario[j][0])+' '+str(diccionario[j][1])+' '+str(diccionario[j][2])+' '+str(diccionario[j][3])+' '+str(diccionario[j][4])+'</li>\n')
-            f.writelines('\t\t</ol>\n')      
+            f.writelines('\t\t</ul>\n')      
     f.writelines('\t</ul>\n')
     f.writelines("<!-- Documento HTML5 -->\n")
     f.writelines('</body>\n')
     f.writelines('</html>\n')
     print("¡Archivo html creado correctamente!\n")
 
-def reporteSede(diccionario):
+def registroSede(diccionario):
     """
     Funcion:Guarda el archivo 
     Entrada:El nombre del archivo y la lista con los elementos
