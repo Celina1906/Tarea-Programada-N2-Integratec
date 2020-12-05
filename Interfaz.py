@@ -16,7 +16,7 @@ matrizSedesEst=[]
 dicPrimerIngreso={}
 matrizMentores=[['CTCC',{}],['CTLSC',{}],['CTLSJ',{}],['CAA',{}],['CAL',{}]]
 ultimoArchivoCreado=None
-nomArchivo='mentores.txt'
+nomArchivo='mentores'
 archivoDB=""
 #Ventana Principal
 ventanaPrincipal=Tk()
@@ -509,6 +509,14 @@ def crearBD():
     '''  
     global dicPrimerIngreso, matrizMentores,archivoDB
     archivoDB=crearDB(dicPrimerIngreso,matrizMentores)
+    ventanaExito=Tk()
+    ventanaExito.title('Base de datos creada')
+    ventanaExito.geometry('550x150')
+    ventanaExito.resizable(FALSE,FALSE)
+    labelExito=Label(ventanaExito,text='Base de datos creada con éxito ', bg='Teal', font=('arial',20))
+    labelExito.place(x=100,y=50)
+    ventanaExito.configure(bg='Teal')
+    ventanaExito.mainloop()
 #Función botón 8
 def enviarCorreo():
     '''
