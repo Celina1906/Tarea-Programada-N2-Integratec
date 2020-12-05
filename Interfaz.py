@@ -16,7 +16,7 @@ matrizSedesEst=[]
 dicPrimerIngreso={}
 matrizMentores=[['CTCC',{}],['CTLSC',{}],['CTLSJ',{}],['CAA',{}],['CAL',{}]]
 ultimoArchivoCreado=None
-nomArchivo='mentores.txt'
+nomArchivo='mentores'
 archivoDB=""
 #Ventana Principal
 ventanaPrincipal=Tk()
