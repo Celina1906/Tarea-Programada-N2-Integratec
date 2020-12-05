@@ -400,9 +400,9 @@ def actualizarEstudiante():
                         else:
                             for sede in matrizMentores:
                                 for est in sede[1]:
-                                    if est==estudiante:
-                                        sede[1][estudiante][0]=entryNombre.get()
-                                        sede[1][estudiante][2]=entryCorreo.get()
+                                    if est==int(entryCarnet.get()):
+                                        sede[1][int(entryCarnet.get())][0]=entryNombre.get()
+                                        sede[1][int(entryCarnet.get())][2]=entryCorreo.get()
                                         print(matrizMentores)
                                         ventanaCambio=Tk()
                                         ventanaCambio.title('Datos cambiados')
@@ -414,7 +414,6 @@ def actualizarEstudiante():
                                         ventanaCambio.mainloop()
                     botonAceptarAc=Button(ventanaActualizar,text='Aceptar',width=18,height=2,command=actualizarMentor)
                     botonAceptarAc.place(x=260,y=300)
-            print(matrizMentores)
             if bandera==0:
                 ventanaNo=Tk()
                 ventanaNo.title('No se encontró el mentor')
@@ -432,6 +431,11 @@ def actualizarEstudiante():
     botonMentor.place(x=370,y=130)
 #Función botón 6   
 def generarReportes():
+    '''
+    Funcionamiento: genera la ventana con los botones que generan los reportes.
+    Entradas: NA
+    Salidas: NA
+    '''  
     ventana6=Tk()
     ventana6.config(bg='Teal')
     ventana6.title('Generar reportes')

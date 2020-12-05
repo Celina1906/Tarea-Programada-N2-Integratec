@@ -96,9 +96,12 @@ def crearMatrizGeneral(MatrizCarreras, listaCantidad, listaSede):
             matrizA.append(dicA)  
     print([matrizCAR,matrizSC,matrizSJ,matrizA,matrizL])
     return [matrizCAR,matrizSC,matrizSJ,matrizA,matrizL]
-
-
 def crearDicPrimerIngreso(matrizSedesEst,diccPrimerIngreso):
+    '''
+    Funcionamiento: Crea el diccionario de los primeros ingresos
+    Entradas: matriz con las sedes y la cantidad de estudiantes y un diccionario vacío
+    Salidas: diccionario de los primeros ingresos
+    '''
     for sede in matrizSedesEst:
         for carrera in sede[2]:
             cantEst=sede[2][carrera]
@@ -157,8 +160,12 @@ def crearDicPrimerIngreso(matrizSedesEst,diccPrimerIngreso):
                 cantEst-=1
     print(diccPrimerIngreso)
     return diccPrimerIngreso
-
 def sacarDatosMentores(matrizMentores):
+    '''
+    Funcionamiento: Introduce los datos de los mentores en una lista
+    Entradas: matriz de mentores
+    Salidas: lista con los datos de todos los mentores
+    '''
     datosMentores=[]
     datosMentores2=[]
     for sede in matrizMentores:
@@ -167,23 +174,34 @@ def sacarDatosMentores(matrizMentores):
         for dato in datos:
             datosMentores2+=[dato]
     return datosMentores2
-
 def sacarDatosPrimerIngreso(dicPrimerIngreso):
+    '''
+    Funcionamiento: Introduce los datos de los primeros ingresos en una lista
+    Entradas: diccionario de primeros ingresos
+    Salidas: lista con los datos de todos los primeros ingresos
+    '''
     datosPrimerIngreso=list(dicPrimerIngreso.values())
     datosPrimerIngreso2=[]
     for datos in datosPrimerIngreso:
         for dato in datos:
             datosPrimerIngreso2+=[dato]
     return datosPrimerIngreso2
-
 def sacarCarnetsMentores(matrizMentores):
+    '''
+    Funcionamiento: Introduce los carnets de los mentores en una lista
+    Entradas: matriz de mentores
+    Salidas: lista con los carnets de los mentores
+    '''
     carnetsMentores=[]
     for sede in matrizMentores:
         carnetsMentores+=sede[1].keys()
     return carnetsMentores
-
-
 def crearMatMentores(matrizSedesEst,diccPrimerIngreso,matrizMentores):
+    '''
+    Funcionamiento: Crea la matriz de los mentores
+    Entradas: matriz de sedes, diccionario de primer ingreso y matriz de mentores 
+    Salidas: matriz de mentores llena
+    '''
     for sede in matrizSedesEst:
         for carrera in sede[2]:
             cantEst=sede[2][carrera]
@@ -239,9 +257,12 @@ def crearMatMentores(matrizSedesEst,diccPrimerIngreso,matrizMentores):
                     matrizMentores[4][1][carnet]=datos
                 cantMentores-=1
     return matrizMentores
-
-
 def asignarMentores(matrizMentores,dicPrimerIngreso):
+    '''
+    Funcionamiento: Asigna los mentores a un primer ingreso
+    Entradas: diccionario de primer ingreso y matriz de mentores 
+    Salidas: diccionario de primer ingreso con los mentores asignados
+    '''
     print(matrizMentores)
     carnetsMentores=[]
     for estudiante in dicPrimerIngreso:
@@ -277,14 +298,13 @@ def asignarMentores(matrizMentores,dicPrimerIngreso):
                 dicPrimerIngreso[estudiante][5]=random.choice(carnetsMentores)
                 carnetsMentores=[]
     return dicPrimerIngreso
-
 def sacarMentores(matrizMentores):
+    '''
+    Funcionamiento: Hace un diccionario con los mentores
+    Entradas: matriz de mentores 
+    Salidas: diccionario de mentores
+    '''
     dicMentores={}
     for sede in matrizMentores:
             dicMentores.update(sede[1])
     return dicMentores
-
-matriz=[['CTCC', {2020019969: ['Cindy Garcia Eller', 'Ingeniería en Biotecnología', 'cgarcia@estudiantec.cr'], 2020018289: ['Janice Sparks Lewis', 'Administración de Empresas', 'jsparks@estudiantec.cr'], 2020011736: ['Kevin Laguire Brickell', 'Ingeniería en Computación', 'klaguire@estudiantec.cr'], 2020012464: ['John Campbell Fallis', 'Gestión en Turismo Sostenible', 'jcampbell@estudiantec.cr'], 2020015952: ['Adrienne Westlake Fisher', 'Enseñanza de la Matemática con Entornos Tecnológicos', 'awestlake@estudiantec.cr'], 2020014540: ['Shaun Coke Weaver', 'Administración de Tecnología de Información', 'scoke@estudiantec.cr'], 2020012719: ['Ryan Folse Blackaby', 'Ingeniería Ambiental', 'rfolse@estudiantec.cr'], 2020019876: ['Kristina Mcdonald Snow', 'Ingeniería en Electrónica', 'kmcdonald@estudiantec.cr'], 2020011084: ['Wanda Bisom Smith', 'Ingeniería Agronegocios', 'wbisom@estudiantec.cr'], 2020015205: ['Josephine Russell Risinger', 'Ingeniería en Computadores', 'jrussell@estudiantec.cr'], 2020018442: ['George Pat Chevrier', 'Ingeniería en Construcción', 'gpat@estudiantec.cr'], 2020016601: ['Hattie Cowell Renfrow', 'Ingeniería en Diseño Industrial', 'hcowell@estudiantec.cr'], 2020013254: ['Barbara Johnson Secor', 'Ingeniería en Materiales', 'bjohnson@estudiantec.cr'], 2020012913: ['Mallory James Propps', 'Ingeniería en Seguridad Laboral e Higiene Ambiental', 'mjames@estudiantec.cr'], 2020014941: ['Jason Dortch Morris', 'Ingeniería Física', 'jdortch@estudiantec.cr'], 2020016339: ['Amy Bush Spiney', 'Ingeniería Mecatrónica', 'abush@estudiantec.cr'], 2020013695: ['Jason Smith Moran', 'Ingeniería en Mantenimiento Industrial', 'jsmith@estudiantec.cr']}], ['CTLSC', {2020026032: ['John Dillard Chase', 'Administración de Empresas', 'jdillard@estudiantec.cr'], 2020023370: ['Quinn Celestin Waterbury', 'Ingeniería en Computación', 'qcelestin@estudiantec.cr'], 2020022827: ['Jacquelyn Hoffman Brow', 'Gestión en Turismo Rural Sostenible', 'jhoffman@estudiantec.cr'], 2020024563: ['Daniel Paletta Abston', 'Ingeniería en Electrónica', 
-'dpaletta@estudiantec.cr'], 2020021179: ['William Erikson Ramirez', 'Ingeniería en Agronomía', 'werikson@estudiantec.cr'], 2020023250: ['Earnest Turner Smith', 'Ingeniería en Producción Industrial', 'eturner@estudiantec.cr']}], ['CTLSJ', {2020036372: ['Raeann Gardner Schaus', 'Arquitectura y Urbanismo', 'rgardner@estudiantec.cr'], 2020035685: ['Frances Williams Cater', 'Administración de Empresas', 'fwilliams@estudiantec.cr'], 2020037347: ['Barbara Edwards Griffin', 'Ingeniería en Computación', 'bedwards@estudiantec.cr'], 2020039302: ['Jose Jeffries James', 'Ingeniería en Computación', 'jjeffries@estudiantec.cr']}], ['CAA', {2020042789: ['Wade Garcia Wolfrom', 'Ingeniería en Computación', 'wgarcia@estudiantec.cr'], 2020045240: ['David Chambers Lombardo', 'Ingeniería en Computación', 'dchambers@estudiantec.cr'], 2020045454: ['David Buckman Lewis', 'Ingeniería en Electrónica', 'dbuckman@estudiantec.cr']}], ['CAL', {2020056602: ['Tom Cox Morgan', 'Administración de Empresas', 'tcox@estudiantec.cr'], 2020058582: ['Bessie Stacy Remus', 'Ingeniería en Computación', 'bstacy@estudiantec.cr'], 2020052485: ['Nancy Patrick Nakken', 'Ingeniería en Producción de Industrial', 'npatrick@estudiantec.cr']}]]
-
-print(sacarMentores(matriz))
