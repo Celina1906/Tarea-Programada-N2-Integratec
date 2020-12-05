@@ -1,6 +1,6 @@
 #Elaborado por: Leandro Camacho Aguilar y Celina Madrigal Murillo
 #Fecha de Creación: 25/11/2020 6:40pm 
-#Fecha de última Modificación: 5/12/2020 9:32pm
+#Fecha de última Modificación: 5/12/2020 6:21pm
 #Versión: 3.9.0
 #Importaciones
 import requests
@@ -8,6 +8,11 @@ import re
 from bs4 import BeautifulSoup
 #Funciones
 def obtenerCarreras():
+    '''
+    Funcionamiento: Por medio de solicitudes HTML extrae las carreras ofrecidas en el tec
+    Entradas: NA
+    Salidas: Matriz con carreras
+    '''
     lista=[]
     r = requests.get('https://www.tec.ac.cr/carreras')
     contenido = r.text
@@ -27,6 +32,11 @@ def obtenerCarreras():
     return lista
 
 def quitaRepetidos(matriz):
+    '''
+    Funcionamiento: Recibe una matriz y elimina repetidos
+    Entradas: matriz
+    Salidas: matriz
+    '''
     nuevaMatriz=[]
     for lista in matriz:
         listaTemp=[]

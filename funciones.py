@@ -1,6 +1,6 @@
 #Elaborado por: Leandro Camacho Aguilar y Celina Madrigal Murillo
 #Fecha de Creación: 26/11/2020 7:43pm 
-#Fecha de última Modificación: 5/12/2020 9:32pm
+#Fecha de última Modificación: 4/12/2020 8:25pm
 #Versión: 3.9.0
 #Importaciones
 from Archrequests import *

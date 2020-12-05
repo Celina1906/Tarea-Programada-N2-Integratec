@@ -1,3 +1,8 @@
+#Elaborado por: Leandro Camacho Aguilar y Celina Madrigal Murillo
+#Fecha de Creación: 18/11/2020 6:12pm 
+#Fecha de última Modificación: 5/12/2020 12:52pm
+#Versión: 3.9.0
+#Importaciones
 import webbrowser,time
 
 def registroMentor(diccionario,matrizMentores):

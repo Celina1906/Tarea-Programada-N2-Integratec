@@ -1,6 +1,6 @@
 #Elaborado por: Leandro Camacho Aguilar y Celina Madrigal Murillo
 #Fecha de Creación: 2/11/2020 7:29pm 
-#Fecha de última Modificación: 5/12/2020 9:32pm
+#Fecha de última Modificación: 5/12/2020 5:40pm
 #Versión: 3.9.0
 #Importaciones
 import smtplib
