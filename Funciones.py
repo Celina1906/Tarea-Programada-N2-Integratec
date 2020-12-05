@@ -96,9 +96,12 @@ def crearMatrizGeneral(MatrizCarreras, listaCantidad, listaSede):
             matrizA.append(dicA)  
     print([matrizCAR,matrizSC,matrizSJ,matrizA,matrizL])
     return [matrizCAR,matrizSC,matrizSJ,matrizA,matrizL]
-
-
 def crearDicPrimerIngreso(matrizSedesEst,diccPrimerIngreso):
+    '''
+    Funcionamiento: Crea el diccionario de los primeros ingresos
+    Entradas: matriz con las sedes y la cantidad de estudiantes y un diccionario vacío
+    Salidas: diccionario de los primeros ingresos
+    '''
     for sede in matrizSedesEst:
         for carrera in sede[2]:
             cantEst=sede[2][carrera]
@@ -157,8 +160,12 @@ def crearDicPrimerIngreso(matrizSedesEst,diccPrimerIngreso):
                 cantEst-=1
     print(diccPrimerIngreso)
     return diccPrimerIngreso
-
 def sacarDatosMentores(matrizMentores):
+    '''
+    Funcionamiento: Introduce los datos de los mentores en una lista
+    Entradas: matriz de mentores
+    Salidas: lista con los datos de todos los mentores
+    '''
     datosMentores=[]
     datosMentores2=[]
     for sede in matrizMentores:
@@ -167,23 +174,34 @@ def sacarDatosMentores(matrizMentores):
         for dato in datos:
             datosMentores2+=[dato]
     return datosMentores2
-
 def sacarDatosPrimerIngreso(dicPrimerIngreso):
+    '''
+    Funcionamiento: Introduce los datos de los primeros ingresos en una lista
+    Entradas: diccionario de primeros ingresos
+    Salidas: lista con los datos de todos los primeros ingresos
+    '''
     datosPrimerIngreso=list(dicPrimerIngreso.values())
     datosPrimerIngreso2=[]
     for datos in datosPrimerIngreso:
         for dato in datos:
             datosPrimerIngreso2+=[dato]
     return datosPrimerIngreso2
-
 def sacarCarnetsMentores(matrizMentores):
+    '''
+    Funcionamiento: Introduce los carnets de los mentores en una lista
+    Entradas: matriz de mentores
+    Salidas: lista con los carnets de los mentores
+    '''
     carnetsMentores=[]
     for sede in matrizMentores:
         carnetsMentores+=sede[1].keys()
     return carnetsMentores
-
-
 def crearMatMentores(matrizSedesEst,diccPrimerIngreso,matrizMentores):
+    '''
+    Funcionamiento: Crea la matriz de los mentores
+    Entradas: matriz de sedes, diccionario de primer ingreso y matriz de mentores 
+    Salidas: matriz de mentores llena
+    '''
     for sede in matrizSedesEst:
         for carrera in sede[2]:
             cantEst=sede[2][carrera]
@@ -239,9 +257,12 @@ def crearMatMentores(matrizSedesEst,diccPrimerIngreso,matrizMentores):
                     matrizMentores[4][1][carnet]=datos
                 cantMentores-=1
     return matrizMentores
-
-
 def asignarMentores(matrizMentores,dicPrimerIngreso):
+    '''
+    Funcionamiento: Asigna los mentores a un primer ingreso
+    Entradas: diccionario de primer ingreso y matriz de mentores 
+    Salidas: diccionario de primer ingreso con los mentores asignados
+    '''
     print(matrizMentores)
     carnetsMentores=[]
     for estudiante in dicPrimerIngreso:
@@ -277,3 +298,13 @@ def asignarMentores(matrizMentores,dicPrimerIngreso):
                 dicPrimerIngreso[estudiante][5]=random.choice(carnetsMentores)
                 carnetsMentores=[]
     return dicPrimerIngreso
+def sacarMentores(matrizMentores):
+    '''
+    Funcionamiento: Hace un diccionario con los mentores
+    Entradas: matriz de mentores 
+    Salidas: diccionario de mentores
+    '''
+    dicMentores={}
+    for sede in matrizMentores:
+            dicMentores.update(sede[1])
+    return dicMentores
